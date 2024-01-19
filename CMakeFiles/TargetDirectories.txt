@@ -1,0 +1,15 @@
+C:/projetos/MicroRTS_cpp/CMakeFiles/MicroRTScpp.dir
+C:/projetos/MicroRTS_cpp/CMakeFiles/exp2.dir
+C:/projetos/MicroRTS_cpp/CMakeFiles/MicroRTSpy.dir
+C:/projetos/MicroRTS_cpp/CMakeFiles/INSTALL.dir
+C:/projetos/MicroRTS_cpp/CMakeFiles/ALL_BUILD.dir
+C:/projetos/MicroRTS_cpp/CMakeFiles/ZERO_CHECK.dir
+C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/Experimental.dir
+C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/Nightly.dir
+C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/Continuous.dir
+C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/NightlyMemoryCheck.dir
+C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/pugixml-static.dir
+C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/INSTALL.dir
+C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/ALL_BUILD.dir
+C:/projetos/MicroRTS_cpp/external/pybind11/CMakeFiles/INSTALL.dir
+C:/projetos/MicroRTS_cpp/external/pybind11/CMakeFiles/ALL_BUILD.dir

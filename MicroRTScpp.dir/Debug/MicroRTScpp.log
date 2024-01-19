@@ -1,0 +1,12 @@
+﻿  Building Custom Rule C:/projetos/MicroRTS_cpp/CMakeLists.txt
+  PhysicalGameState.cpp
+C:\projetos\MicroRTS_cpp\src\cpp\PhysicalGameState.cpp(1,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'PhysicalGameState.h': No such file or directory
+  UnitTypeTable.cpp
+C:\projetos\MicroRTS_cpp\src\cpp\UnitTypeTable.cpp(3,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'UnitTypeTable.h': No such file or directory
+  UnitType.cpp
+C:\projetos\MicroRTS_cpp\src\cpp\UnitType.cpp(1,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'UnitType.h': No such file or directory
+  Player.cpp
+C:\projetos\MicroRTS_cpp\src\cpp\Player.cpp(1,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'Player.h': No such file or directory
+  Unit.cpp
+C:\projetos\MicroRTS_cpp\src\cpp\Unit.cpp(1,10): fatal  error C1083: Não é possível abrir arquivo incluir: 'pugixml.hpp': No such file or directory
+  Gerando Código...

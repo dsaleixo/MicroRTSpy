@@ -1,0 +1,8 @@
+pyproject.toml
+setup.py
+MicroRTSpy.egg-info/PKG-INFO
+MicroRTSpy.egg-info/SOURCES.txt
+MicroRTSpy.egg-info/dependency_links.txt
+MicroRTSpy.egg-info/not-zip-safe
+MicroRTSpy.egg-info/requires.txt
+MicroRTSpy.egg-info/top_level.txt

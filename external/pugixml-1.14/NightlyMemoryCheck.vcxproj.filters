@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\projetos\MicroRTS_cpp\CMakeFiles\55d4a5fc829a74f86f7ffcf0c6e1b091\NightlyMemoryCheck.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\projetos\MicroRTS_cpp\external\pugixml-1.14\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\projetos\MicroRTS_cpp\external\pugixml-1.14\CMakeFiles\NightlyMemoryCheck" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{5D64E469-AEFC-3AF9-8F33-F5440E331AB3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

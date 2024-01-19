@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\projetos\MicroRTS_cpp\build\temp.win-amd64-cpython-311\Release\MicroRTSpy\CMakeFiles\ed9763425d1d0b5cb53a0d82817e56a3\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{A1CAB26E-6E76-33A3-B0CD-BC27EF228F56}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

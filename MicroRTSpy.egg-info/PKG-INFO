@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: MicroRTSpy
+Version: 0.0.1
+Summary: A test project using pybind11 and CMake
+Author: David S. Aleixo
+Author-email: david_leixo@hotmail.com
+Requires-Python: >=3.7
+Provides-Extra: test
+Requires-Dist: pytest>=6.0; extra == "test"

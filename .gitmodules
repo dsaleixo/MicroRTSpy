@@ -1,0 +1,3 @@
+[submodule "vendor/libexpatpp`"]
+	path = vendor/libexpatpp`
+	url = https://github.com/gittiver/libexpatpp
