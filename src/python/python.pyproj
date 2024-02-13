@@ -23,11 +23,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="main.py" />
     <Compile Include="python.py" />
     <Compile Include="tests\test.py" />
+    <Compile Include="tests\test1.py" />
+    <Compile Include="util\screen.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="maps\" />
+    <Folder Include="util\" />
     <Folder Include="tests\" />
   </ItemGroup>
   <ItemGroup>

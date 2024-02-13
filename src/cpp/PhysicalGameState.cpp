@@ -3,13 +3,119 @@
 #include "Unit.h"
 #include "pugixml.hpp"
 
-long Unit::next_ID = 0;
 
-PhysicalGameState::PhysicalGameState(int a_width, int a_height) {
-    width = a_width;
-    height = a_height;
+int PhysicalGameState::winner() {
+    
+    int unitcounts[] = { 0,0 };
+    int totalunits = 0;
+    for (Unit* u : this->units) {
+        if (u->getPlayer() >= 0) {
+            unitcounts[u->getPlayer()]++;
+        }
+    }
+    int winner = -1;
+    for (int i = 0; i < 2; i++) {
+        if (unitcounts[i] > 0) {
+            if (winner == -1) {
+                winner = i;
+            }
+            else {
+                return -1;
+            }
+        }
+    }
+
+    return winner;
+}
+
+bool PhysicalGameState::gameover() {
+    int unitcounts[] = {0,0};
+    int totalunits = 0;
+    for (Unit *u : this->units) {
+        if (u->getPlayer() >= 0) {
+            unitcounts[u->getPlayer()]++;
+            totalunits++;
+        }
+    }
+
+    if (totalunits == 0) {
+        return true;
+    }
+
+    int winner = -1;
+    for (int i = 0; i < 2; i++) {
+        if (unitcounts[i] > 0) {
+            if (winner == -1) {
+                winner = i;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+
+    return winner != -1;
+}
+
+void PhysicalGameState::removeUnit(Unit* u) {
+    this->units.erase(std::remove(this->units.begin(), this->units.end(), u),
+        this->units.end());
     
 }
+
+Unit* PhysicalGameState::getUnitAt(int x, int y) {
+    for (Unit* u : this->units) {
+        if (u->getX() == x && u->getY() == y) {
+            return u;
+        }
+    }
+    return nullptr;
+}
+
+Player PhysicalGameState::getPlayer(int pID) {
+    return this->players[pID];
+}
+
+int PhysicalGameState::getWidth() {
+    return this->width;
+}
+
+
+int PhysicalGameState::getHeight() {
+    return this->height;
+}
+
+
+int PhysicalGameState::getTERRAIN_WALL() {
+    return TERRAIN_WALL;
+}
+/**
+         * Returns what is on a given position of the terrain
+         *
+         * @param x
+         * @param y
+         * @return
+         */
+int PhysicalGameState::getTerrain(int x, int y) {
+
+    return this->terrain[x + y * this->width];
+
+}
+
+
+PhysicalGameState::PhysicalGameState(int a_width, int a_height) {
+    this->width = a_width;
+    this->height = a_height;
+    
+}
+
+PhysicalGameState::PhysicalGameState(int a_width, int a_height, vector<int> a_terrain) {
+    this->width = a_width;
+    this->height = a_height;
+    this->terrain = a_terrain;
+
+}
+
 
 PhysicalGameState::~PhysicalGameState() {
   
@@ -17,17 +123,17 @@ PhysicalGameState::~PhysicalGameState() {
 }
 
 Unit* PhysicalGameState::getUnit(long ID) {
-    for (Unit u : this->units) {
-        if (u.getID() == ID) {
-            return &u;
+    for (Unit* u : this->units) {
+        if (u->getID() == ID) {
+            return u;
         }
     }
     return nullptr;
 }
 
 
-int* PhysicalGameState::getTerrainFromUnknownString(string terrainString, int size) {
-    int *terrain = new int[size];
+vector<int> PhysicalGameState::getTerrainFromUnknownString(string terrainString, int size) {
+    vector<int> terrain;
    //if (terrainString.contains("A") || terrainString.contains("B")) {
    //     terrain = uncompressTerrain(terrainString);
    // }
@@ -35,9 +141,10 @@ int* PhysicalGameState::getTerrainFromUnknownString(string terrainString, int si
     
         for (int i = 0; i < size; i++) {
             
-            terrain[i] = (int) terrainString[i]-48;
+            terrain.push_back( (int) terrainString[i]-48);
             
         }
+       
     //}
 
     return terrain;
@@ -51,28 +158,29 @@ PhysicalGameState PhysicalGameState::fromXML(pugi::xml_node &e, UnitTypeTable &u
 
     int width = e.attribute("width").as_int();
     int height = e.attribute("height").as_int();
-    cout << height << " " << height << endl;
+   
     
     string ss = terrain_e.child_value();
-    cout<<ss << endl;
-    int *terrain = getTerrainFromUnknownString(ss, width * height);
+   
+    vector<int> terrain = getTerrainFromUnknownString(ss, width * height);
     
-    PhysicalGameState pgs =  PhysicalGameState(width, height);
+    PhysicalGameState pgs =  PhysicalGameState(width, height,terrain);
     
     for (pugi::xml_node o : players_e.children()) {
         Player p = Player::fromXML(o);
-        cout << p.toString() << endl;
+       
         pgs.addPlayer(p);
     }
     
     
     for (pugi::xml_node o : units_e.children()) {
        
-        Unit u = Unit::fromXML(o, utt);
+        Unit *u = Unit::fromXML(o, utt);
         // check for repeated IDs:
-        if (pgs.getUnit(u.getID()) != nullptr) {
+        if (pgs.getUnit(u->getID()) != nullptr) {
             cout << "error pgs fromXML" << endl;
         }
+      
         pgs.addUnit(u);
     }
     
@@ -83,7 +191,7 @@ void PhysicalGameState::addPlayer(Player p) {
     this->players.push_back(p);
 }
 
-vector<Unit>& PhysicalGameState::getUnits() {
+vector<Unit*>& PhysicalGameState::getUnits() {
     return this->units;
 
 }
@@ -95,7 +203,7 @@ vector<Unit>& PhysicalGameState::getUnits() {
      * @throws IllegalArgumentException if the new unit's position is already
      * occupied
      */
-    void PhysicalGameState::addUnit(Unit &newUnit) {
+    void PhysicalGameState::addUnit(Unit *newUnit) {
     /*
     for (Unit existingUnit : units) {
         if (newUnit.getX() == existingUnit.getX() && newUnit.getY() == existingUnit.getY()) {

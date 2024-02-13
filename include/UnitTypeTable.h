@@ -56,7 +56,7 @@ class UnitTypeTable {
         /**
          * The list of unit types allowed in the game
          */
-        vector<UnitType> unitTypes;
+        vector<UnitType*> unitTypes;
 
         /**
          * Which move conflict resolution is being adopted
@@ -101,27 +101,27 @@ class UnitTypeTable {
          * Adds a new unit type to the game
          * @param ut
          */
-        void addUnitType(UnitType ut);
+        void addUnitType(UnitType *ut);
 
         /**
          * Retrieves a unit type by its numeric ID
          * @param ID
          * @return
          */
-        UnitType getUnitType(int ID);
+        UnitType* getUnitType(int ID);
 
         /**
          * Retrieves a unit type by its name. Returns null if name is not found.
          * @param name
          * @return
          */
-        UnitType getUnitType(string name);
+        UnitType* getUnitType(string name);
 
         /**
          * Returns the list of all unit types
          * @return
          */
-        vector<UnitType>* getUnitTypes();
+        vector<UnitType*>* getUnitTypes();
 
         /*
          * Returns the integer corresponding to the move conflict resolution strategy in use
@@ -156,7 +156,7 @@ class UnitTypeTable {
          * @param JSON
          * @return
          */
-        static UnitTypeTable fromJSON(string JSON);
+        static UnitTypeTable* fromJSON(string JSON);
 
 };
 

@@ -4,8 +4,10 @@
 
 #include "UnitType.h"
 #include "UnitTypeTable.h"
-#include "UnitAction.h"
+#include "pugixml.hpp"
 #include "GameState.h"
+#include "UnitAction.h"
+
 #include "string"
 
 
@@ -22,7 +24,7 @@ class Unit {
         /*
          *The type of this unit(worker, ranged, barracks, etc.)
          */
-        UnitType type;
+        UnitType *type;
 
         /**
          * Indicates the ID to assign to a new unit.
@@ -70,7 +72,9 @@ class Unit {
          * @param a_resources
          */
 
-        Unit(long a_ID, int a_player, UnitType &a_type, int a_x, int a_y, int a_resources);
+        Unit();
+
+        Unit(long a_ID, int a_player, UnitType *a_type, int a_x, int a_y, int a_resources);
 
         /**
          * Creates a unit without specifying its ID. It is automatically assigned from
@@ -81,7 +85,7 @@ class Unit {
          * @param a_y
          * @param a_resources
          */
-        Unit(int a_player, UnitType &a_type, int a_x, int a_y, int a_resources);
+        Unit(int a_player, UnitType *a_type, int a_x, int a_y, int a_resources);
 
         /**
          * Creates a unit without specifying resources, which receive zero
@@ -90,7 +94,7 @@ class Unit {
          * @param a_x
          * @param a_y
          */
-        Unit(int a_player, UnitType &a_type, int a_x, int a_y);
+        Unit(int a_player, UnitType *a_type, int a_x, int a_y);
 
         /**
          * Copies the attributes from other unit
@@ -108,7 +112,7 @@ class Unit {
          * Returns the type
          * @return
          */
-        UnitType& getType();
+        UnitType* getType();
 
         /**
          * Sets the type of this unit.
@@ -117,7 +121,7 @@ class Unit {
          * of the current game state, but changing the UTT.
          * @param a_type
          */
-        void setType(UnitType &a_type);
+        void setType(UnitType *a_type);
 
         /**
          * Returns the unique identifier
@@ -163,6 +167,11 @@ class Unit {
          * @param a_y
          */
         void setY(int a_y);
+
+
+
+        
+
 
         /**
          * Returns the amount of resources this unit is carrying
@@ -247,26 +256,26 @@ class Unit {
          * An idle action for 10 cycles is always generated
          * @param s
          * @return
-        
-        vector<UnitAction>& getUnitActions(GameState &s);
-         */
+           */
+        vector<UnitAction>* getUnitActions(GameState& s);
+      
         /**
          * Returns a list of actions this unit can perform in a given game state.
          * An idle action for noneDuration cycles is always generated
          * @param s
          * @param noneDuration the amount of cycles for the idle action that is always generated
          * @return
-         
-        vector<UnitAction>& getUnitActions(GameState &s, int noneDuration);
-        */
+        */ 
+        vector<UnitAction>* getUnitActionsINT(GameState &s, int noneDuration);
+        
         /**
          * Indicates whether this unit can perform an action in a given state
          * @param ua
          * @param gs
          * @return
-         
+          */
         bool canExecuteAction(UnitAction& ua, GameState& gs);
-        */
+       
 
         string toString();
 
@@ -310,7 +319,7 @@ class Unit {
          * @param utt
          * @return
          */
-        static  Unit& fromXML(pugi::xml_node &e, UnitTypeTable &utt);
+        static  Unit* fromXML(pugi::xml_node &e, UnitTypeTable &utt);
 
         /**
          * Constructs a unit from a JSON object
@@ -322,5 +331,6 @@ class Unit {
         */
 
 };
+
 
 #endif

@@ -3,6 +3,28 @@
 
 using namespace std;
 
+    
+    bool UnitType::getCanMove() {
+        return this->canMove;
+    }
+
+    bool UnitType::getIsStockpile() {
+        return this->isStockpile;
+    }
+
+    UnitType::UnitType() {
+    ;
+    }
+    UnitType::UnitType(const UnitType &other) {
+        this->name = other.name;
+    }
+  
+
+    string UnitType::getName() {
+        return this->name;
+    }
+
+
     /**
      * Returns the hash code of the name
      * // assume that all unit types have different names:
@@ -23,10 +45,10 @@ using namespace std;
      * Adds a unit type that a unit of this type can produce
      * @param ut
      */
-    void UnitType::produces(UnitType ut)
+    void UnitType::produces(UnitType *ut)
     {
         this->produces_v.push_back(ut);
-        ut.producedBy_v.push_back(*this);
+        ut->producedBy_v.push_back(this);
     }
 
     /**

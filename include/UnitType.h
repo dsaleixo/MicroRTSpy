@@ -100,12 +100,12 @@ class UnitType{
         /**
          * Units that this type of unit can produce
          */
-        vector<UnitType> produces_v;
+        vector<UnitType*> produces_v;
 
         /**
          * Which unit types produce a unit of this type
          */
-        vector<UnitType> producedBy_v;
+        vector<UnitType*> producedBy_v;
 
         /**
          * Returns the hash code of the name
@@ -113,6 +113,11 @@ class UnitType{
          
         int hashCode();
         */
+public:
+         UnitType();
+         UnitType(const UnitType &other);
+         bool getCanMove();
+         bool getIsStockpile();
 
         /* (non-Javadoc)
          * @see java.lang.Object#equals(java.lang.Object)
@@ -123,7 +128,7 @@ class UnitType{
          * Adds a unit type that a unit of this type can produce
          * @param ut
          */
-        void produces(UnitType ut);
+        void produces(UnitType *ut);
 
         /**
          * Creates a temporary instance with just the name and ID from a XML element
@@ -154,6 +159,8 @@ class UnitType{
          
         void updateFromJSON(string JSON, UnitTypeTable utt);
         */
+
+        string getName();
 
        
 

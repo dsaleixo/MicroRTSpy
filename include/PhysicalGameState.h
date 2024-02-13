@@ -3,7 +3,7 @@
 #define PHYSICAL_GAMESTATE_H  
 
 
-
+class Unit;
 #include <vector>
 
 #include <iostream>
@@ -20,7 +20,7 @@
 using namespace  std;
 
 class PhysicalGameState {
-
+    public:
     /**
      * Indicates a free tile
      */
@@ -33,9 +33,9 @@ class PhysicalGameState {
 
     int width = 8;
     int height = 8;
-    int* terrain = {};
+    vector<int> terrain = {};
     vector<Player> players;
-    vector<Unit> units;
+    vector<Unit*> units;
 
 
     //destructor
@@ -71,7 +71,7 @@ class PhysicalGameState {
              * @param a_height
              * @param t
              */
-            PhysicalGameState(int a_width, int a_height, int t[]);
+            PhysicalGameState(int a_width, int a_height, vector<int> a_terrain);
 
         /**
          * @return
@@ -81,8 +81,10 @@ class PhysicalGameState {
         /**
          * @return
          */
-            int getHeight();
+            int getHeight(); 
 
+            static int getTERRAIN_WALL();
+;
         /**
          * Sets a new width. This do not change the terrain array, remember to
          * change that when you change the map width or height
@@ -138,21 +140,21 @@ class PhysicalGameState {
          * @throws IllegalArgumentException if the new unit's position is already
          * occupied
          */
-         void addUnit(Unit &newUnit);
+         void addUnit(Unit* newUnit);
 
         /**
          * Removes a unit from the map
          *
          * @param u
          */
-         //void removeUnit(Unit u);
+         void removeUnit(Unit *u);
 
         /**
          * Returns the list of units in the map
          *
          * @return
          */
-         vector<Unit>& getUnits();
+         vector<Unit*>& getUnits();
 
         /**
          * Returns a list of players
@@ -167,7 +169,7 @@ class PhysicalGameState {
               * @param pID
               * @return
               */
-          //Player getPlayer(int pID);
+          Player getPlayer(int pID);
 
         /**
          * Returns a {@link Unit} given its ID or null if not found
@@ -185,7 +187,7 @@ class PhysicalGameState {
          * @param y
          * @return
          */
-          //Unit getUnitAt(int x, int y);
+          Unit* getUnitAt(int x, int y);
 
         /**
          * Returns the units within a squared area centered in the given coordinates
@@ -228,6 +230,16 @@ class PhysicalGameState {
          * @return
          */
          int winner();
+
+
+         /**
+            * Returns whether the game is over. The game is over when a player has zero
+            * units
+            *
+            * @return
+            */
+         bool gameover();
+
 
         /* (non-Javadoc)
          * @see java.lang.Object#clone()
@@ -337,7 +349,7 @@ class PhysicalGameState {
          * @param size size of the resulting integer array
          * @return the terrain, in its integer representation
          */
-         static int* getTerrainFromUnknownString(string terrainString, int size);
+         static vector<int> getTerrainFromUnknownString(string terrainString, int size);
 
         /**
          * Reset all units HP to their base value
