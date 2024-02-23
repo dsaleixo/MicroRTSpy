@@ -8,7 +8,7 @@
 
 
 class PathFinding {
-
+public:
 
     // This fucntion finds the shortest path from 'start' to 'targetpos' and then returns
    // a UnitAction of the type 'actionType' with the direction of the first step in the shorteet path
@@ -29,23 +29,10 @@ class PathFinding {
      * This function is like the previous one, but doesn't try to reach 'target', but just to
      * reach a position adjacent to 'target'
      */
-    virtual UnitAction findPathToAdjacentPosition(Unit *start, int targetpos, GameState &gs, ResourceUsage &ru);
+       
 
-    virtual bool pathExists(Unit start, int targetpos, GameState &gs, ResourceUsage &ru);
-
-
-    virtual bool pathToPositionInRangeExists(Unit start, int targetpos, int range, GameState &gs, ResourceUsage &ru);
-
-    // and keep the "open" list sorted:
-    void addToOpen(int x, int y, int newPos, int oldPos, int h);
-
-
-    int manhattanDistance(int x, int y, int x2, int y2);
-
-    virtual int findDistToPositionInRange(Unit start, int targetpos, int range, GameState gs, ResourceUsage ru);
-        
-#endif
 
 
 
 };
+#endif

@@ -118,7 +118,9 @@ public:
          UnitType(const UnitType &other);
          bool getCanMove();
          bool getIsStockpile();
-
+         bool getCanAttack();
+         bool getcanHarvest();
+         bool getisResource();
         /* (non-Javadoc)
          * @see java.lang.Object#equals(java.lang.Object)
          */

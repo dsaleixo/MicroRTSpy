@@ -1,5 +1,16 @@
 #include "ResourceUsage.h"
 
+
+void ResourceUsage::merge(ResourceUsage& other) {
+    for (auto pos : other.positionsUsed) {
+        this->positionsUsed.push_back(pos);
+    }
+    
+    for (int i = 0; i < 2; i++) {
+        resourcesUsed[i] += other.resourcesUsed[i];
+    }
+}
+
 ResourceUsage::ResourceUsage() {
 
 }

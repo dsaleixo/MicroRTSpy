@@ -115,7 +115,7 @@ class UnitTypeTable {
          * @param name
          * @return
          */
-        UnitType* getUnitType(string name);
+        UnitType* getUnitTypeString(string name);
 
         /**
          * Returns the list of all unit types

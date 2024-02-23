@@ -1,6 +1,7 @@
 #ifndef PlayerAction_H // include guard
 #define PlayerAction_H  
 class UnitAction;
+class ResourceUsage;
 #include "UnitAction.h"
 #include "Unit.h"
 #include "ResourceUsage.h"
@@ -24,7 +25,7 @@ public:
      * Represents the resources used by the player action
      * TODO rename the field
      */
-     // ResourceUsage r;
+      ResourceUsage *r;
 
     /**
      *
@@ -64,14 +65,14 @@ public:
      * Returns the usage of resources
      * @return
      */
-     // ResourceUsage getResourceUsage();
+      ResourceUsage* getResourceUsage();
 
     /**
      * Sets the resource usage
      * @param a_r
      */
 
-     //void setResourceUsage(ResourceUsage a_r);
+     void setResourceUsage(ResourceUsage &a_r);
 
     /**
      * Adds a new {@link UnitAction} to a given {@link Unit}
@@ -100,7 +101,7 @@ public:
      * @return
      */
 
-     //vector<pair<Unit*, UnitAction>> getActions();
+     vector<pair<Unit*, UnitAction>>& getActions();
 
     /**
      * Searches for the unit in the collection and returns the respective {@link UnitAction}
@@ -126,7 +127,7 @@ public:
      * @param gs
      * @return
      */
-     //bool consistentWith(ResourceUsage u, GameState *gs);
+     bool consistentWith(ResourceUsage &u, GameState *gs);
 
 
     /**
@@ -136,7 +137,7 @@ public:
      * @param pID the player ID
      * @param duration the number of frames the 'none' action should last
      */
-     //void fillWithNones(GameState *s, int pID, int duration);
+     void fillWithNones(GameState *s, int pID, int duration);
 
 
     /**

@@ -1,10 +1,18 @@
 cmake_minimum_required(VERSION 3.0)
 project(MicroRTS_CPP)
 
+if (WIN32)
+    add_subdirectory(external/pugixml-win/pugixml-1.14 EXCLUDE_FROM_ALL)
+endif (WIN32)
 
-add_subdirectory(external/pugixml-1.14 EXCLUDE_FROM_ALL)
+if (UNIX)
+    add_subdirectory(external/pugixml-unix/pugixml-1.14 EXCLUDE_FROM_ALL)
+endif (UNIX)
 
-add_library(MicroRTScpp  STATIC src/cpp/PhysicalGameState.cpp src/cpp/UnitTypeTable.cpp  src/cpp/UnitType.cpp src/cpp/Player.cpp src/cpp/Unit.cpp)
+
+add_library(MicroRTScpp  STATIC src/cpp/PhysicalGameState.cpp 	src/cpp/UnitTypeTable.cpp  src/cpp/UnitType.cpp src/cpp/Player.cpp src/cpp/Unit.cpp src/cpp/GameState.cpp src/cpp/PlayerAction.cpp src/cpp/ResourceUsage.cpp src/cpp/UnitActionAssignment.cpp src/cpp/UnitAction.cpp src/cpp/AStarPathFinding.cpp)
+
+
 target_include_directories(MicroRTScpp   PUBLIC include/)
 target_link_libraries(MicroRTScpp pugixml)
 
@@ -20,3 +28,4 @@ add_subdirectory(external/pybind11)
 pybind11_add_module(MicroRTSpy src/brind_pybind11/PhysicalGameState_py.cpp  )
 target_link_libraries(MicroRTSpy  PUBLIC  MicroRTScpp)
 target_include_directories(MicroRTSpy  PUBLIC include/)
+

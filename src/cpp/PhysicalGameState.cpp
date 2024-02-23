@@ -4,6 +4,24 @@
 #include "pugixml.hpp"
 
 
+bool** PhysicalGameState::getAllFree() {
+    bool **free = new bool* [this->getWidth()];
+    for (int i = 0; i < this->getWidth(); i++) free[i] = new bool[this->getHeight()];
+
+
+    for (int x = 0; x < getWidth(); x++) {
+        for (int y = 0; y < getHeight(); y++) {
+            free[x][y] = getTerrain(x, y) == PhysicalGameState::TERRAIN_NONE;
+        }
+    }
+    for (Unit *u : units) {
+        free[u->getX()][u->getY()] = false;
+    }
+
+    return free;
+}
+
+
 int PhysicalGameState::winner() {
     
     int unitcounts[] = { 0,0 };
@@ -72,7 +90,7 @@ Unit* PhysicalGameState::getUnitAt(int x, int y) {
     return nullptr;
 }
 
-Player PhysicalGameState::getPlayer(int pID) {
+Player& PhysicalGameState::getPlayer(int pID) {
     return this->players[pID];
 }
 

@@ -142,7 +142,7 @@ public:
      * @param a_type
      */
     UnitAction(int a_type);
-
+    ~UnitAction();
     /**
      * Creates an action with type and direction
      *

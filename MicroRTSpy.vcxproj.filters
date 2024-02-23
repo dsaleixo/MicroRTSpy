@@ -4,18 +4,6 @@
     <ClCompile Include="C:\projetos\MicroRTS_cpp\src\brind_pybind11\PhysicalGameState_py.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\brind_pybind11\Player_py.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\brind_pybind11\Unit_py.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\brind_pybind11\UnitType_py.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\brind_pybind11\UnitTypeTable_py.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\projetos\MicroRTS_cpp\CMakeLists.txt" />

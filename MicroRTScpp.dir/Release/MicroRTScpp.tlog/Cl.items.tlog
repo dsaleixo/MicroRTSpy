@@ -3,3 +3,8 @@ C:\projetos\MicroRTS_cpp\src\cpp\UnitTypeTable.cpp;C:\projetos\MicroRTS_cpp\Micr
 C:\projetos\MicroRTS_cpp\src\cpp\UnitType.cpp;C:\projetos\MicroRTS_cpp\MicroRTScpp.dir\Release\UnitType.obj
 C:\projetos\MicroRTS_cpp\src\cpp\Player.cpp;C:\projetos\MicroRTS_cpp\MicroRTScpp.dir\Release\Player.obj
 C:\projetos\MicroRTS_cpp\src\cpp\Unit.cpp;C:\projetos\MicroRTS_cpp\MicroRTScpp.dir\Release\Unit.obj
+C:\projetos\MicroRTS_cpp\src\cpp\GameState.cpp;C:\projetos\MicroRTS_cpp\MicroRTScpp.dir\Release\GameState.obj
+C:\projetos\MicroRTS_cpp\src\cpp\PlayerAction.cpp;C:\projetos\MicroRTS_cpp\MicroRTScpp.dir\Release\PlayerAction.obj
+C:\projetos\MicroRTS_cpp\src\cpp\ResourceUsage.cpp;C:\projetos\MicroRTS_cpp\MicroRTScpp.dir\Release\ResourceUsage.obj
+C:\projetos\MicroRTS_cpp\src\cpp\UnitActionAssignment.cpp;C:\projetos\MicroRTS_cpp\MicroRTScpp.dir\Release\UnitActionAssignment.obj
+C:\projetos\MicroRTS_cpp\src\cpp\UnitAction.cpp;C:\projetos\MicroRTS_cpp\MicroRTScpp.dir\Release\UnitAction.obj

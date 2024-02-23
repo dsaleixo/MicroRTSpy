@@ -253,7 +253,7 @@
      * @param name
      * @return
      */
-     UnitType* UnitTypeTable::getUnitType(string name) {
+     UnitType* UnitTypeTable::getUnitTypeString(string name) {
         for (UnitType* ut : unitTypes) {
             if (ut->name == name) return ut;
         }

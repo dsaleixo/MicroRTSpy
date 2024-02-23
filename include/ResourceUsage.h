@@ -57,7 +57,7 @@ public:
      *
      * @param other
      */
-    void merge(ResourceUsage other);
+    void merge(ResourceUsage &other);
 
     ResourceUsage clone();
 

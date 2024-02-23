@@ -127,6 +127,7 @@ class CMakeBuild(build_ext):
 # logic and declaration, and simpler if you include description/version in a file.
 setup(
     name="MicroRTSpy",
+    data_files=[('.', ['MicroRTSpy.pyi'])],
     version="0.0.1",
     author="David S. Aleixo",
     author_email="david_leixo@hotmail.com",

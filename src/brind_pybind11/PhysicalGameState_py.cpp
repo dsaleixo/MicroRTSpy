@@ -9,6 +9,7 @@
 #include "ResourceUsage.h"
 #include "UnitAction.h"
 #include "UnitActionAssignment.h"
+#include "AStarPathFinding.h"
 
 
 #include <stdio.h>
@@ -20,7 +21,14 @@ namespace py = pybind11;
 
 
 PYBIND11_MODULE(MicroRTSpy, m) {
+    m.doc() = "MicroRTS c++";
 
+    py::class_<ResourceUsage>(m, "ResourceUsage")
+        .def(py::init<>())
+        .def("merge", &ResourceUsage::merge)
+        .def("getPositionsUsed", &ResourceUsage::getPositionsUsed)
+        .def("toString", &ResourceUsage::toString)
+        .def("consistentWith", &ResourceUsage::consistentWith);
 
     py::class_<UnitActionAssignment>(m, "UnitActionAssignment")
         .def("getUnit", &UnitActionAssignment::getUnit, py::return_value_policy::reference)
@@ -34,10 +42,12 @@ PYBIND11_MODULE(MicroRTSpy, m) {
         .def(py::init<int, int, int>())
         .def(py::init<int, int, UnitType*>())
         .def("toString", &UnitAction::toString)
+        .def("resourceUsage", &UnitAction::resourceUsage)
         .def("getDirection", &UnitAction::getDirection)
         .def("getLocationX", &UnitAction::getLocationX)
         .def("getLocationY", &UnitAction::getLocationY)
         .def("getType", &UnitAction::getType)
+        .def("ETA", &UnitAction::ETA)
         .def("getActionName", &UnitAction::getActionName)
         .def("getTYPE_NONE", &UnitAction::getTYPE_NONE)
         .def("getTYPE_MOVE", &UnitAction::getTYPE_MOVE)
@@ -54,22 +64,39 @@ PYBIND11_MODULE(MicroRTSpy, m) {
 
     py::class_<PlayerAction>(m, "PlayerAction")
         .def(py::init<>())
+        .def("fillWithNones", &PlayerAction::fillWithNones)
+        .def("getResourceUsage", &PlayerAction::getResourceUsage, py::return_value_policy::reference)
+        .def("setResourceUsage", &PlayerAction::setResourceUsage)
+        .def("consistentWith", &PlayerAction::consistentWith)
+        .def("getActions", &PlayerAction::getActions, py::return_value_policy::reference)
         .def("addUnitAction", &PlayerAction::addUnitAction);
+
+
+    py::class_<AStarPathFinding>(m, "AStarPathFinding")
+        .def(py::init<int,int>())
+        .def("findPathToAdjacentPosition", &AStarPathFinding::findPathToAdjacentPosition)
+        .def("findPathToPositionInRange", &AStarPathFinding::findPathToPositionInRange);
 
     py::class_<GameState>(m, "GameState")
         .def(py::init<PhysicalGameState*, UnitTypeTable*>())
         .def("getActionAssignment", &GameState::getActionAssignment, py::return_value_policy::reference)
         .def("getTime", &GameState::getTime)
+        .def("free", &GameState::free)
         .def("getNextChangeTime", &GameState::getNextChangeTime)
+        .def("isUnitActionAllowed", &GameState::isUnitActionAllowed)
         .def("issueSafe", &GameState::issueSafe)
+        .def("getPlayer", &GameState::getPlayer)
         .def("cycle", &GameState::cycle)
+        .def("getResourceUsage", &GameState::getResourceUsage)
         .def("winner", &GameState::winner)
         .def("gameover", &GameState::gameover)
+        .def("updateScream", &GameState::updateScream)
         .def("getPhysicalGameState", &GameState::getPhysicalGameState, py::return_value_policy::reference);
 
     py::class_<PhysicalGameState>(m, "PhysicalGameState")
         .def(py::init<int,int>())
         .def("load", &PhysicalGameState::load)
+        .def("getAllFree", &PhysicalGameState::getAllFree, py::return_value_policy::reference)
         .def("getUnits", &PhysicalGameState::getUnits, py::return_value_policy::reference)
         .def("addUnit", &PhysicalGameState::addUnit)
         .def("addPlayer", &PhysicalGameState::addPlayer)
@@ -88,6 +115,7 @@ PYBIND11_MODULE(MicroRTSpy, m) {
         .def(py::init<int, int>())
         .def("setUnitTypeTable", &UnitTypeTable::setUnitTypeTable)
         .def("addUnitType", &UnitTypeTable::addUnitType)
+        .def("getUnitTypeString", &UnitTypeTable::getUnitTypeString, py::return_value_policy::reference)
         .def("getUnitTypes", &UnitTypeTable::getUnitTypes, py::return_value_policy::reference)
         .def("getMoveConflictResolutionStrategy", &UnitTypeTable::getMoveConflictResolutionStrategy)
         .def("getUnit", &UnitTypeTable::getUnitTypes);
@@ -107,6 +135,7 @@ PYBIND11_MODULE(MicroRTSpy, m) {
         .def("setX", &Unit::setX)
         .def("setY", &Unit::setY)
         .def("getResources", &Unit::getResources)
+        .def("getAttackRange", &Unit::getAttackRange)
         .def("setResources", &Unit::setResources)
         .def("getHitPoints", &Unit::getHitPoints)
         .def("getMaxHitPoints", &Unit::getMaxHitPoints)
@@ -139,6 +168,9 @@ PYBIND11_MODULE(MicroRTSpy, m) {
         .def("getName", &UnitType::getName)
         .def("getIsStockpile", &UnitType::getIsStockpile)
         .def("getCanMove", &UnitType::getCanMove)
+        .def("getCanAttack", &UnitType::getCanAttack)
+        .def("getcanHarvest", &UnitType::getcanHarvest)
+        .def("getisResource", &UnitType::getisResource)
         .def("produces", &UnitType::produces);
 
 }

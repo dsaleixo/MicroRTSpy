@@ -3,7 +3,17 @@
 
 using namespace std;
 
-    
+    bool UnitType::getisResource() {
+        return this->isResource;
+    }
+
+    bool UnitType::getcanHarvest() {
+        return this->canHarvest;
+    }
+
+    bool UnitType::getCanAttack() {
+        return this->canAttack;
+    }
     bool UnitType::getCanMove() {
         return this->canMove;
     }
@@ -17,6 +27,8 @@ using namespace std;
     }
     UnitType::UnitType(const UnitType &other) {
         this->name = other.name;
+        this->attackRange = other.attackRange;
+        this->isStockpile = other.isStockpile;
     }
   
 

@@ -23,6 +23,7 @@ public:
     PhysicalGameState *pgs;
     unordered_map<Unit*, UnitActionAssignment> unitActions;
     UnitTypeTable *utt;
+    bool** _free;
 
     /**
      * Initializes the GameState with a PhysicalGameState and a UnitTypeTable
@@ -48,7 +49,7 @@ public:
      * @param ID
      * @return
      */
-      Player getPlayer(int ID);
+      Player& getPlayer(int ID);
 
     /**
      * @see PhysicalGameState#getUnit(long)
@@ -121,7 +122,7 @@ public:
      * @param y coordinate of the position
      * @return
      */
-     //bool free(int x, int y);
+     bool free(int x, int y);
 
 
     /**
@@ -129,7 +130,8 @@ public:
      * the specified position and no unit is executing an action that will use that position
      * @return
      */
-     //bool** getAllFree();
+   // bool** getAllFree();
+     void calculateFree();
 
 
     /**
@@ -175,7 +177,7 @@ public:
      * @param ua
      * @return
      */
-     //bool isUnitActionAllowed(Unit* u, UnitAction ua);
+     bool isUnitActionAllowed(Unit* u, UnitAction &ua);
 
 
     /**
@@ -200,7 +202,7 @@ public:
      * @return
      */
       int getNextChangeTime();
-
+      bool updateScream();
 
     /**
      * Runs a game cycle, execution all assigned actions
@@ -240,7 +242,7 @@ public:
      * in current cycle
      * @return
      */
-     //ResourceUsage getResourceUsage();
+     ResourceUsage getResourceUsage();
 
 
     /*

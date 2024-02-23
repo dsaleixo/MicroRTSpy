@@ -4,14 +4,59 @@
 #include <unordered_map>
 #include <cstdlib>
 
+ResourceUsage GameState::getResourceUsage() {
+    ResourceUsage base_ru =  ResourceUsage();
+
+    for (Unit *u : this->pgs->getUnits()) {
+        auto &uaa = this->unitActions.find(u);
+        if (uaa != this->unitActions.end()) {
+            ResourceUsage ru = uaa->second.action->resourceUsage(u, pgs);
+            base_ru.merge(ru);
+        }
+    }
+
+    return base_ru;
+}
+
+
+bool GameState::isUnitActionAllowed(Unit* u, UnitAction &ua) {
+    PlayerAction empty;
+
+    if (ua.getType() == UnitAction::TYPE_MOVE) {
+        int x2 = u->getX() + UnitAction::DIRECTION_OFFSET_X[ua.getDirection()];
+        int y2 = u->getY() + UnitAction::DIRECTION_OFFSET_Y[ua.getDirection()];
+        if (x2 < 0 || y2 < 0 ||
+            x2 >= this->pgs->getWidth() ||
+            y2 >= this->pgs->getHeight() ||
+            this->pgs->getTerrain(x2, y2) == PhysicalGameState::TERRAIN_WALL ||
+            this->pgs->getUnitAt(x2, y2) != nullptr) return false;
+    }
+
+    // Generate the reserved resources:
+    for (Unit *u2 : pgs->getUnits()) {
+        auto& uaa = unitActions.find(u2);
+        
+        if (uaa != unitActions.end()) {
+            ResourceUsage ru = uaa->second.action->resourceUsage(u2, pgs);
+            empty.r->merge(ru);
+        }
+    }
+
+    return ua.resourceUsage(u, pgs).consistentWith(*(empty.getResourceUsage()), this);
+}
+
+
 GameState::GameState(PhysicalGameState* a_pgs, UnitTypeTable* a_utt) {
 	this->pgs =  a_pgs;
 	this->utt = a_utt;
 	this->time = 0;
+    this->_free = new bool* [this->pgs->getWidth()];
+    for (int i = 0; i < this->pgs->getWidth(); i++) this->_free[i] = new bool[this->pgs->getHeight()];
+    this->calculateFree();
 
 }
 
-Player GameState::getPlayer(int ID) {
+Player& GameState::getPlayer(int ID) {
     return this->pgs->getPlayer(ID);
 }
 
@@ -36,9 +81,7 @@ bool GameState::gameover() {
 int GameState::getNextChangeTime() {
     int nextChangeTime = -1;
 
-    for (Player &player : this->pgs->players) {
-        if (this->canExecuteAnyAction(player.getID())) return this->getTime();
-    }
+    
 
     for (auto &Puaa : this->unitActions) {
         UnitActionAssignment& uaa = Puaa.second;
@@ -49,6 +92,23 @@ int GameState::getNextChangeTime() {
     if (nextChangeTime == -1) return this->getTime();
     return nextChangeTime;
 }
+
+
+bool GameState::updateScream() {
+    int nextChangeTime = -1;
+
+
+
+    for (auto& Puaa : this->unitActions) {
+        UnitActionAssignment& uaa = Puaa.second;
+        if (uaa.time == this->getTime())return true;
+        int t = uaa.time + uaa.action->ETA(uaa.unit);
+        if (t - 1 == this->getTime()) return true;
+    }
+
+    return false;
+}
+
 
 bool GameState::integrityCheck() {
     vector<Unit*> alreadyUsed;
@@ -94,7 +154,7 @@ bool GameState::issue(PlayerAction &pa) {
         //            {
                         // check for conflicts:
         ResourceUsage ru = p.second.resourceUsage(p.first, pgs);
-    
+        
         for (auto& Puaa : this->unitActions) {
             auto& uaa = Puaa.second;
            
@@ -188,7 +248,7 @@ bool GameState::issueSafe(PlayerAction& pa){
   
 
 
-    // cout << "ok1" << endl;
+    
     if (!pa.integrityCheck()) { cout << "PlayerAction inconsistent before 'issueSafe'" << endl;; }
   
     if (!integrityCheck()) { cout << "GameState inconsistent before 'issueSafe'" << endl;}
@@ -198,15 +258,19 @@ bool GameState::issueSafe(PlayerAction& pa){
             // cout<<"Issuing an action to a null unit!!!"<<endl;
             return false;
         }
-       
+        
+
         if (!p.first->canExecuteAction(p.second, *this)) {
+           
             if (REPORT_ILLEGAL_ACTIONS) {
                  cout << "Issuing a non legal action to unit " + p.second.toString() + "!! Ignoring it..." << endl;
             }
             // replace the action by a NONE action of the same duration:
+          
             int l = p.second.ETA(p.first);
-             
+           
             p.second =  UnitAction(UnitAction::TYPE_NONE, l);
+         
         }
       
         // get the unit that corresponds to that action (since the state might have been cloned):
@@ -227,7 +291,7 @@ bool GameState::issueSafe(PlayerAction& pa){
                 // cout << "Inconsistent order: pa" << endl;
             }
         }
-
+       
         {
             // check to see if the action is legal!
             ResourceUsage r = p.second.resourceUsage(p.first, pgs);
@@ -249,10 +313,10 @@ bool GameState::issueSafe(PlayerAction& pa){
 
     }
   
-    
+   
 
     bool returnValue = issue(pa);
-   
+    
     if (!integrityCheck()) // cout << "GameState inconsistent after 'issueSafe': pa " << endl;
     return returnValue;
 }
@@ -266,6 +330,37 @@ PhysicalGameState* GameState::getPhysicalGameState() {
 	return this->pgs;
 }
 
+void GameState::calculateFree() {
+    for (int i = 0; i < this->pgs->getWidth(); i++) {
+        for (int j = 0; j < this->pgs->getHeight(); j++) {
+            this->_free[i][j]= pgs->getTerrain(i, j) == PhysicalGameState::TERRAIN_NONE;
+        }
+    }
+   
+    for (Unit* u : this->pgs->units) {
+        this->_free[u->getX()][u->getY()] = false;
+    }
+   
+    for (auto &Pua : this->unitActions) {
+        auto& ua = Pua.second;
+        if (ua.action->type == UnitAction::TYPE_MOVE ||
+            ua.action->type == UnitAction::TYPE_PRODUCE) {
+            Unit *u = ua.unit;
+            if (ua.action->getDirection() == UnitAction::DIRECTION_UP ) this->_free[u->getX()][u->getY()-1] = false;;
+            if (ua.action->getDirection() == UnitAction::DIRECTION_RIGHT ) this->_free[u->getX()+1][u->getY()] = false;
+            if (ua.action->getDirection() == UnitAction::DIRECTION_DOWN ) this->_free[u->getX()][u->getY()+1] = false;
+            if (ua.action->getDirection() == UnitAction::DIRECTION_LEFT ) this->_free[u->getX()-1][u->getY()] = false;
+        }
+    }
+    
+    
+
+}
+
+bool  GameState::free(int x, int y) {
+    
+    return this->_free[x][y];
+}
 
 
 bool GameState::cycle() {
@@ -290,7 +385,7 @@ bool GameState::cycle() {
         
     }
 
-    return false;
+    this->calculateFree();
 	return true;
 }
 

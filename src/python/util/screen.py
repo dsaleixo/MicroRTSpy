@@ -8,6 +8,8 @@ from MicroRTSpy import GameState
 from MicroRTSpy import UnitActionAssignment
 from MicroRTSpy import UnitAction
 
+
+
 from pygame.time import delay
 
 
@@ -131,12 +133,25 @@ class ScreenMicroRTS:
                     pygame.draw.line(self._window, self._red, 
                                 self.t([u.getX()*self._grid+self._grid/2, u.getY()*self._grid+self._grid/2]), 
                                 self.t([u.getX()*self._grid+self._grid/2 + offsx, u.getY()*self._grid+self._grid/2 + offsy]), 3)
-                     
-                
-                
-
-
-
+            
+                    
+                elif UnitAction.getTYPE_HARVEST() == type_action or type_action ==   UnitAction.getTYPE_RETURN(): 
+                    pygame.draw.line(self._window, self._white, 
+                                self.t([u.getX()*self._grid+self._grid/2, u.getY()*self._grid+self._grid/2]), 
+                                self.t([u.getX()*self._grid+self._grid/2 + offsx, u.getY()*self._grid+self._grid/2 + offsy]), 3)
+    
+                elif UnitAction.getTYPE_PRODUCE() == type_action:
+                    pygame.draw.line(self._window, self._blue, 
+                            self.t([u.getX()*self._grid+self._grid/2, u.getY()*self._grid+self._grid/2]), 
+                            self.t([u.getX()*self._grid+self._grid/2 + offsx, u.getY()*self._grid+self._grid/2 + offsy]), 3)
+                     # draw building progress bar
+                    ETA = uaa.getTime() + uaa.getUnitAction().ETA(uaa.getUnit()) - self._gs.getTime();
+                    p = self.t([u.getX() * self._grid + offsx, u.getY() * self._grid + offsy])
+                    pygame.draw.rect(self._window, self._blue, 
+                                      [p[0], p[1], 
+                                       self._grid - int(self._grid * (ETA / uaa.getUnitAction().ETA(uaa.getUnit()))), 
+                                       (self._grid / 5.0)])
+                 
 
             reduction = 0
             

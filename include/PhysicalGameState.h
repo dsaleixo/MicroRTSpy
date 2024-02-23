@@ -169,7 +169,7 @@ class PhysicalGameState {
               * @param pID
               * @return
               */
-          Player getPlayer(int pID);
+          Player& getPlayer(int pID);
 
         /**
          * Returns a {@link Unit} given its ID or null if not found

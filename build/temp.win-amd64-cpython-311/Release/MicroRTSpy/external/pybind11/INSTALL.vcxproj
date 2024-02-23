@@ -69,7 +69,7 @@
       <UseUtf8Encoding>Always</UseUtf8Encoding>
       <Message></Message>
       <Command>setlocal
-"C:\Users\Gilmar Aleixo\AppData\Local\Temp\pip-build-env-xtszyzdb\overlay\Lib\site-packages\cmake\data\bin\cmake.exe" -DBUILD_TYPE=$(Configuration) -P cmake_install.cmake
+"C:\Users\Gilmar Aleixo\AppData\Local\Temp\pip-build-env-gthnh_mp\overlay\Lib\site-packages\cmake\data\bin\cmake.exe" -DBUILD_TYPE=$(Configuration) -P cmake_install.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -84,7 +84,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <UseUtf8Encoding>Always</UseUtf8Encoding>
       <Message></Message>
       <Command>setlocal
-"C:\Users\Gilmar Aleixo\AppData\Local\Temp\pip-build-env-xtszyzdb\overlay\Lib\site-packages\cmake\data\bin\cmake.exe" -DBUILD_TYPE=$(Configuration) -P cmake_install.cmake
+"C:\Users\Gilmar Aleixo\AppData\Local\Temp\pip-build-env-gthnh_mp\overlay\Lib\site-packages\cmake\data\bin\cmake.exe" -DBUILD_TYPE=$(Configuration) -P cmake_install.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -99,7 +99,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <UseUtf8Encoding>Always</UseUtf8Encoding>
       <Message></Message>
       <Command>setlocal
-"C:\Users\Gilmar Aleixo\AppData\Local\Temp\pip-build-env-xtszyzdb\overlay\Lib\site-packages\cmake\data\bin\cmake.exe" -DBUILD_TYPE=$(Configuration) -P cmake_install.cmake
+"C:\Users\Gilmar Aleixo\AppData\Local\Temp\pip-build-env-gthnh_mp\overlay\Lib\site-packages\cmake\data\bin\cmake.exe" -DBUILD_TYPE=$(Configuration) -P cmake_install.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -114,7 +114,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <UseUtf8Encoding>Always</UseUtf8Encoding>
       <Message></Message>
       <Command>setlocal
-"C:\Users\Gilmar Aleixo\AppData\Local\Temp\pip-build-env-xtszyzdb\overlay\Lib\site-packages\cmake\data\bin\cmake.exe" -DBUILD_TYPE=$(Configuration) -P cmake_install.cmake
+"C:\Users\Gilmar Aleixo\AppData\Local\Temp\pip-build-env-gthnh_mp\overlay\Lib\site-packages\cmake\data\bin\cmake.exe" -DBUILD_TYPE=$(Configuration) -P cmake_install.cmake
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone

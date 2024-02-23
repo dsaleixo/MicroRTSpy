@@ -16,6 +16,24 @@
     <ClCompile Include="C:\projetos\MicroRTS_cpp\src\cpp\Unit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\projetos\MicroRTS_cpp\src\cpp\GameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\projetos\MicroRTS_cpp\src\cpp\PlayerAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\projetos\MicroRTS_cpp\src\cpp\ResourceUsage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\projetos\MicroRTS_cpp\src\cpp\UnitActionAssignment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\projetos\MicroRTS_cpp\src\cpp\UnitAction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\projetos\MicroRTS_cpp\src\cpp\AStarPathFinding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\projetos\MicroRTS_cpp\CMakeLists.txt" />

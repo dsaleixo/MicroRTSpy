@@ -132,8 +132,9 @@ vector<UnitAction>* Unit::getUnitActionsINT(GameState& s, int noneDuration){
 
 bool Unit::canExecuteAction(UnitAction& ua, GameState& gs) {
    
+
     vector<UnitAction> *l = getUnitActionsINT(gs, ua.ETA(this));
-  
+    
    // bool aux = std::find(l->begin(), l->end(), ua) == l->end();
   
     for (auto& it : *l) {
@@ -146,7 +147,7 @@ bool Unit::canExecuteAction(UnitAction& ua, GameState& gs) {
         
         
     }
-   
+  
     delete l;
     return false;
     
@@ -525,7 +526,7 @@ public void toJSON(Writer w) throws Exception {
     long ID = stol(IDStr);
     if (ID >= next_ID) next_ID = ID + 1;
     
-    UnitType *type = utt.getUnitType(typeName);
+    UnitType *type = utt.getUnitTypeString(typeName);
     
     int player = atol(playerStr.c_str());
     int x = atol(xStr.c_str());

@@ -1,1 +1,13 @@
-﻿  MicroRTScpp.vcxproj -> C:\projetos\MicroRTS_cpp\Release\MicroRTScpp.lib
+﻿  PhysicalGameState.cpp
+  Unit.cpp
+  GameState.cpp
+  PlayerAction.cpp
+  ResourceUsage.cpp
+  UnitActionAssignment.cpp
+  UnitAction.cpp
+  AStarPathFinding.cpp
+  Gerando Código...
+C:\projetos\MicroRTS_cpp\src\cpp\AStarPathFinding.cpp(49): error C4716: 'AStarPathFinding::findPathToPositionInRange': deve retornar um valor
+C:\projetos\MicroRTS_cpp\src\cpp\GameState.cpp(258): warning C4715: 'GameState::issueSafe': nem todos os caminhos de controle retornam um valor
+C:\projetos\MicroRTS_cpp\src\cpp\Unit.cpp(463): warning C4172: retornando o endereço da variável local ou temporário
+C:\projetos\MicroRTS_cpp\src\cpp\PhysicalGameState.cpp(237): warning C4715: 'PhysicalGameState::load': nem todos os caminhos de controle retornam um valor

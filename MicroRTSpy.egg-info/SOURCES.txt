@@ -1,3 +1,4 @@
+MicroRTSpy.pyi
 pyproject.toml
 setup.py
 MicroRTSpy.egg-info/PKG-INFO

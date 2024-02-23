@@ -57,7 +57,7 @@ UnitAction::UnitAction(const UnitAction& other) {
     this->unitType = other.unitType;
 }
 
-UnitAction::UnitAction() {
+UnitAction::~UnitAction() {
     this->unitType = nullptr;
 }
 
@@ -146,6 +146,7 @@ ResourceUsage UnitAction::resourceUsage(Unit* u, PhysicalGameState* pgs) {
 
 
 int UnitAction::ETA(Unit* u) {
+    
     switch (type) {
     case TYPE_NONE:
         return parameter;
@@ -172,44 +173,138 @@ int UnitAction::ETA(Unit* u) {
 void UnitAction::execute(Unit* u, GameState& s) {
     PhysicalGameState *pgs = s.getPhysicalGameState();
     switch (type) {
-    case TYPE_NONE:	//no-op
-        break;
+        case TYPE_NONE:	//no-op
+            break;
 
-    case TYPE_MOVE: //moves the unit in the intended direction
-        switch (parameter) {
-        case DIRECTION_UP:
-            u->setY(u->getY() - 1);
+        case TYPE_MOVE: //moves the unit in the intended direction
+            cout << "asdsad " << u->toString() << endl;
+            switch (parameter) {
+            case DIRECTION_UP:
+                u->setY(u->getY() - 1);
+                break;
+            case DIRECTION_RIGHT:
+                u->setX(u->getX() + 1);
+                break;
+            case DIRECTION_DOWN:
+                u->setY(u->getY() + 1);
+                break;
+            case DIRECTION_LEFT:
+                u->setX(u->getX() - 1);
+                break;
+            }
             break;
-        case DIRECTION_RIGHT:
-            u->setX(u->getX() + 1);
-            break;
-        case DIRECTION_DOWN:
-            u->setY(u->getY() + 1);
-            break;
-        case DIRECTION_LEFT:
-            u->setX(u->getX() - 1);
-            break;
+
+        case TYPE_ATTACK_LOCATION: //if there's a unit in the target location, damages it
+        {
+            Unit *other = pgs->getUnitAt(x, y);
+            if (other != nullptr) {
+                int damage;
+                if (u->getMinDamage() == u->getMaxDamage()) {
+                    damage = u->getMinDamage();
+                }
+                else {
+                    damage = u->getMinDamage() + (rand()%(1 + (u->getMaxDamage() - u->getMinDamage())));
+                }
+                other->setHitPoints(other->getHitPoints() - damage);
+                if (other->getHitPoints() <= 0) {
+                    s.removeUnit(other);
+                }
+            }
         }
         break;
 
-    case TYPE_ATTACK_LOCATION: //if there's a unit in the target location, damages it
-    {
-        Unit *other = pgs->getUnitAt(x, y);
-        if (other != nullptr) {
-            int damage;
-            if (u->getMinDamage() == u->getMaxDamage()) {
-                damage = u->getMinDamage();
+        case TYPE_HARVEST: //attempts to harvest from a resource in the target direction
+        {
+            Unit *maybeAResource = nullptr;
+            switch (parameter) {
+            case DIRECTION_UP:
+                maybeAResource = pgs->getUnitAt(u->getX(), u->getY() - 1);
+                break;
+            case DIRECTION_RIGHT:
+                maybeAResource = pgs->getUnitAt(u->getX() + 1, u->getY());
+                break;
+            case DIRECTION_DOWN:
+                maybeAResource = pgs->getUnitAt(u->getX(), u->getY() + 1);
+                break;
+            case DIRECTION_LEFT:
+                maybeAResource = pgs->getUnitAt(u->getX() - 1, u->getY());
+                break;
             }
-            else {
-                damage = u->getMinDamage() + (rand()%(1 + (u->getMaxDamage() - u->getMinDamage())));
-            }
-            other->setHitPoints(other->getHitPoints() - damage);
-            if (other->getHitPoints() <= 0) {
-                s.removeUnit(other);
+            if (maybeAResource != nullptr && maybeAResource->getType()->isResource && u->getType()->canHarvest && u->getResources() == 0) {
+                //indeed it is a resource, harvest from it
+                maybeAResource->setResources(maybeAResource->getResources() - u->getHarvestAmount());
+                if (maybeAResource->getResources() <= 0) {
+                    s.removeUnit(maybeAResource);
+                }
+                u->setResources(u->getHarvestAmount());
             }
         }
-    }
-    break;
+        break;
+
+        case TYPE_RETURN: //returns to base with a resource
+        {
+            Unit *base = nullptr;
+            switch (parameter) {
+            case DIRECTION_UP:
+                base = pgs->getUnitAt(u->getX(), u->getY() - 1);
+                break;
+            case DIRECTION_RIGHT:
+                base = pgs->getUnitAt(u->getX() + 1, u->getY());
+                break;
+            case DIRECTION_DOWN:
+                base = pgs->getUnitAt(u->getX(), u->getY() + 1);
+                break;
+            case DIRECTION_LEFT:
+                base = pgs->getUnitAt(u->getX() - 1, u->getY());
+                break;
+            }
+           
+            if (base != nullptr && base->getType()->isStockpile && u->getResources() > 0) {
+                Player &p = pgs->getPlayer(u->getPlayer());
+                
+                p.setResources(p.getResources() + u->getResources());
+                
+                u->setResources(0);
+               
+            }
+            else {// base is not there
+
+            }
+        }
+        break;
+        case TYPE_PRODUCE: //produces a unit in the target direction
+        {
+            Unit *newUnit = nullptr;
+            int targetx = u->getX();
+            int targety = u->getY();
+            switch (this->parameter) {
+            case DIRECTION_UP:
+                targety--;
+                break;
+            case DIRECTION_RIGHT:
+                targetx++;
+                break;
+            case DIRECTION_DOWN:
+                targety++;
+                break;
+            case DIRECTION_LEFT:
+                targetx--;
+                break;
+            }
+            newUnit = new Unit(u->getPlayer(), unitType, targetx, targety, 0);
+            
+            Player &p = pgs->getPlayer(u->getPlayer());
+            if ((p.getResources() - newUnit->getCost()) >= 0) {
+                pgs->addUnit(newUnit);
+                p.setResources(p.getResources() - newUnit->getCost());
+            }
+
+            if (p.getResources() < 0) {
+                //System.err.print("Illegal action executed! resources of player " + p.ID + " are now " + p.getResources() + "\n");
+                //System.err.print(s);
+                cout << "Illegal action executed! resources of player " << p.getID() << " are now " << p.getResources() << endl;
+            }
+        }
     break;
     }
 }
