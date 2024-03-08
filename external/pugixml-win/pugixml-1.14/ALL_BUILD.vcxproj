@@ -108,11 +108,11 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\projetos\MicroRTS_cpp\external\pugixml-1.14\CMakeLists.txt">
+    <CustomBuild Include="C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/projetos/MicroRTS_cpp -BC:/projetos/MicroRTS_cpp --check-stamp-file C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/projetos/MicroRTS_cpp -BC:/projetos/MicroRTS_cpp --check-stamp-file C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -120,12 +120,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.28\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTest.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestTargets.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestUseLaunchers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\DartConfiguration.tcl.in;C:\Program Files\CMake\share\cmake-3.28\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\WriteBasicConfigVersionFile.cmake;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\scripts\pugixml-config.cmake.in;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\scripts\pugixml.pc.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projetos\MicroRTS_cpp\external\pugixml-1.14\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.28\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTest.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestTargets.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestUseLaunchers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\DartConfiguration.tcl.in;C:\Program Files\CMake\share\cmake-3.28\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\WriteBasicConfigVersionFile.cmake;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\scripts\pugixml-config.cmake.in;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\scripts\pugixml.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/projetos/MicroRTS_cpp -BC:/projetos/MicroRTS_cpp --check-stamp-file C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/projetos/MicroRTS_cpp -BC:/projetos/MicroRTS_cpp --check-stamp-file C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -133,12 +133,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.28\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTest.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestTargets.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestUseLaunchers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\DartConfiguration.tcl.in;C:\Program Files\CMake\share\cmake-3.28\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\WriteBasicConfigVersionFile.cmake;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\scripts\pugixml-config.cmake.in;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\scripts\pugixml.pc.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\projetos\MicroRTS_cpp\external\pugixml-1.14\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.28\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTest.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestTargets.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestUseLaunchers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\DartConfiguration.tcl.in;C:\Program Files\CMake\share\cmake-3.28\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\WriteBasicConfigVersionFile.cmake;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\scripts\pugixml-config.cmake.in;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\scripts\pugixml.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/projetos/MicroRTS_cpp -BC:/projetos/MicroRTS_cpp --check-stamp-file C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/projetos/MicroRTS_cpp -BC:/projetos/MicroRTS_cpp --check-stamp-file C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -146,12 +146,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.28\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTest.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestTargets.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestUseLaunchers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\DartConfiguration.tcl.in;C:\Program Files\CMake\share\cmake-3.28\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\WriteBasicConfigVersionFile.cmake;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\scripts\pugixml-config.cmake.in;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\scripts\pugixml.pc.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\projetos\MicroRTS_cpp\external\pugixml-1.14\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.28\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTest.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestTargets.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestUseLaunchers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\DartConfiguration.tcl.in;C:\Program Files\CMake\share\cmake-3.28\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\WriteBasicConfigVersionFile.cmake;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\scripts\pugixml-config.cmake.in;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\scripts\pugixml.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/projetos/MicroRTS_cpp -BC:/projetos/MicroRTS_cpp --check-stamp-file C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/projetos/MicroRTS_cpp -BC:/projetos/MicroRTS_cpp --check-stamp-file C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -159,8 +159,8 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.28\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTest.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestTargets.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestUseLaunchers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\DartConfiguration.tcl.in;C:\Program Files\CMake\share\cmake-3.28\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\WriteBasicConfigVersionFile.cmake;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\scripts\pugixml-config.cmake.in;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\scripts\pugixml.pc.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\projetos\MicroRTS_cpp\external\pugixml-1.14\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.28\Modules\BasicConfigVersion-SameMajorVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTest.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestTargets.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\CTestUseLaunchers.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\DartConfiguration.tcl.in;C:\Program Files\CMake\share\cmake-3.28\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.28\Modules\WriteBasicConfigVersionFile.cmake;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\scripts\pugixml-config.cmake.in;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\scripts\pugixml.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
@@ -173,7 +173,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\projetos\MicroRTS_cpp\external\pugixml-1.14\pugixml-static.vcxproj">
+    <ProjectReference Include="C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\pugixml-static.vcxproj">
       <Project>{37FA108C-301C-30F3-B3B0-1EECE6C2052B}</Project>
       <Name>pugixml-static</Name>
     </ProjectReference>

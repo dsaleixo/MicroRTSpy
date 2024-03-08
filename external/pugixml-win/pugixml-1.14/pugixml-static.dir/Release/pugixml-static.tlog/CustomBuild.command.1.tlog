@@ -1,6 +1,6 @@
-^C:\PROJETOS\MICRORTS_CPP\EXTERNAL\PUGIXML-1.14\CMAKELISTS.TXT
+^C:\PROJETOS\MICRORTS_CPP\EXTERNAL\PUGIXML-WIN\PUGIXML-1.14\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/projetos/MicroRTS_cpp -BC:/projetos/MicroRTS_cpp --check-stamp-file C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/projetos/MicroRTS_cpp -BC:/projetos/MicroRTS_cpp --check-stamp-file C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

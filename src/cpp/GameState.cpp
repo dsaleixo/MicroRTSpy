@@ -1,16 +1,20 @@
 #include "GameState.h"
 #include "PhysicalGameState.h"
+#include "PlayerAction.h"
+#include "ResourceUsage.h"
 #include "UnitTypeTable.h"
 #include <unordered_map>
 #include <cstdlib>
+#include <algorithm>
 
 ResourceUsage GameState::getResourceUsage() {
     ResourceUsage base_ru =  ResourceUsage();
 
-    for (Unit *u : this->pgs->getUnits()) {
-        auto &uaa = this->unitActions.find(u);
+    for (auto &aux : this->pgs->units) {
+        Unit& u = aux.second;
+        auto uaa = this->unitActions.find(u.ID);
         if (uaa != this->unitActions.end()) {
-            ResourceUsage ru = uaa->second.action->resourceUsage(u, pgs);
+            ResourceUsage ru = uaa->second.action.resourceUsage(u, pgs);
             base_ru.merge(ru);
         }
     }
@@ -19,25 +23,26 @@ ResourceUsage GameState::getResourceUsage() {
 }
 
 
-bool GameState::isUnitActionAllowed(Unit* u, UnitAction &ua) {
+bool GameState::isUnitActionAllowed(Unit &u, UnitAction &ua) {
     PlayerAction empty;
 
     if (ua.getType() == UnitAction::TYPE_MOVE) {
-        int x2 = u->getX() + UnitAction::DIRECTION_OFFSET_X[ua.getDirection()];
-        int y2 = u->getY() + UnitAction::DIRECTION_OFFSET_Y[ua.getDirection()];
+        int x2 = u.getX() + UnitAction::DIRECTION_OFFSET_X[ua.getDirection()];
+        int y2 = u.getY() + UnitAction::DIRECTION_OFFSET_Y[ua.getDirection()];
         if (x2 < 0 || y2 < 0 ||
             x2 >= this->pgs->getWidth() ||
             y2 >= this->pgs->getHeight() ||
             this->pgs->getTerrain(x2, y2) == PhysicalGameState::TERRAIN_WALL ||
-            this->pgs->getUnitAt(x2, y2) != nullptr) return false;
+            this->pgs->getUnitAt(x2, y2) != Unit::unit_null) return false;
     }
 
     // Generate the reserved resources:
-    for (Unit *u2 : pgs->getUnits()) {
-        auto& uaa = unitActions.find(u2);
+    for (auto &aux : pgs->units) {
+        Unit &u2 = aux.second;
+        auto uaa = unitActions.find(u2.ID);
         
         if (uaa != unitActions.end()) {
-            ResourceUsage ru = uaa->second.action->resourceUsage(u2, pgs);
+            ResourceUsage ru = uaa->second.action.resourceUsage(u2, pgs);
             empty.r->merge(ru);
         }
     }
@@ -62,9 +67,10 @@ Player& GameState::getPlayer(int ID) {
 
 
 bool GameState::canExecuteAnyAction(int pID) {
-    for (Unit *u : this->pgs->getUnits()) {
-        if (u->getPlayer() == pID) {
-            if (unitActions.find(u) == unitActions.end()) return true;
+    for (auto &aux : this->pgs->units) {
+        Unit& u = aux.second;
+        if (u.getPlayer() == pID) {
+            if (unitActions.find(u.ID) == unitActions.end()) return true;
         }
     }
     return false;
@@ -85,7 +91,8 @@ int GameState::getNextChangeTime() {
 
     for (auto &Puaa : this->unitActions) {
         UnitActionAssignment& uaa = Puaa.second;
-        int t = uaa.time + uaa.action->ETA(uaa.unit);
+        Unit& u = this->pgs->getUnit(Puaa.first);
+        int t = uaa.time + uaa.action.ETA(u);
         if (nextChangeTime == -1 || t < nextChangeTime) nextChangeTime = t;
     }
 
@@ -102,7 +109,8 @@ bool GameState::updateScream() {
     for (auto& Puaa : this->unitActions) {
         UnitActionAssignment& uaa = Puaa.second;
         if (uaa.time == this->getTime())return true;
-        int t = uaa.time + uaa.action->ETA(uaa.unit);
+        Unit& u = this->pgs->getUnit(Puaa.first);
+        int t = uaa.time + uaa.action.ETA(u);
         if (t - 1 == this->getTime()) return true;
     }
 
@@ -111,23 +119,23 @@ bool GameState::updateScream() {
 
 
 bool GameState::integrityCheck() {
-    vector<Unit*> alreadyUsed;
+    //vector<Unit*> alreadyUsed;
    
     
     for (auto& it : this->unitActions) {
   
-        Unit* u = it.second.unit;
+        Unit &u = pgs->getUnit(it.first);
         
-        if (std::find(pgs->getUnits().begin(), pgs->getUnits().end(), u) == pgs->getUnits().end()) {
+        if (u == Unit::unit_null) {
              cout << "integrityCheck: unit does not exist!" << endl;;
             return false;
         }
-        
+        /* olhar dps
         if (std::find(alreadyUsed.begin(), alreadyUsed.end(), u) != alreadyUsed.end()) {
              cout << "integrityCheck: two actions to the same unit!" << endl;
             return false;
         }
-        
+        */
         
        
     }
@@ -140,7 +148,7 @@ bool GameState::integrityCheck() {
 bool GameState::issue(PlayerAction &pa) {
     bool returnValue = false;
     
-
+    cout << "ooooooooooooooooooooooooooooook-0" << endl;
     
     for (auto& p : pa.actions) {
         // cout << "sas01" << endl;
@@ -154,15 +162,15 @@ bool GameState::issue(PlayerAction &pa) {
         //            {
                         // check for conflicts:
         ResourceUsage ru = p.second.resourceUsage(p.first, pgs);
-        
+        cout << "ok-0" << endl;
         for (auto& Puaa : this->unitActions) {
             auto& uaa = Puaa.second;
-           
-            bool aux = uaa.action->resourceUsage(uaa.unit, pgs).consistentWith(ru, this);
-            
+            Unit& u = this->pgs->getUnit(Puaa.first);
+            bool aux = uaa.action.resourceUsage(u, pgs).consistentWith(ru, this);
+            cout << "ok0" << endl;
             if (!aux) {
                 // conflicting actions:
-              
+                cout << "ok1" << endl;
                 if (uaa.time == time) {
                     // The actions were issued in the same game cycle, so it's normal
                     bool cancel_old = false;
@@ -184,18 +192,20 @@ bool GameState::issue(PlayerAction &pa) {
                         unitCancelationCounter++;
                         break;
                     }
-                   
-                    int duration1 = uaa.action->ETA(uaa.unit);
+                    cout << "ok2" << endl;
+                    Unit& u = this->pgs->getUnit(Puaa.first);
+                    int duration1 = uaa.action.ETA(u);
                     int duration2 = p.second.ETA(p.first);
+                    cout << "ok3" << endl;
                     if (cancel_old) {
                         //                                System.out.println("Old action canceled: " + uaa.unit.getID() + ", " + uaa.action);
-                        uaa.action = new UnitAction(UnitAction::TYPE_NONE, min(duration1, duration2));
+                        uaa.action =  UnitAction(UnitAction::TYPE_NONE, min(duration1, duration2));
                     }
                     if (cancel_new) {
                         //                                System.out.println("New action canceled: " + p.m_a.getID() + ", " + p.m_b);
                         p = make_pair(p.first, UnitAction(UnitAction::TYPE_NONE, min(duration1, duration2)));
                     }
-                    
+                    cout << "ok4" << endl;
                 }
                 else {
                     // This is more a problem, since it means there is a bug somewhere...
@@ -224,11 +234,11 @@ bool GameState::issue(PlayerAction &pa) {
             
         }
      
-        UnitActionAssignment* uaa = new UnitActionAssignment(p.first, new UnitAction(p.second), time);
+        UnitActionAssignment uaa = UnitActionAssignment(p.first.ID,  p.second, time);
         
-        pair<Unit*, UnitActionAssignment> temp{ p.first, *uaa };
+        
        
-        unitActions.insert(temp);
+        unitActions.insert({ p.first.ID,uaa });
        
 
         if (p.second.type != UnitAction::getTYPE_NONE()) returnValue = true;
@@ -247,51 +257,54 @@ bool GameState::issueSafe(PlayerAction& pa){
    
   
 
-
+    cout << "okkkkr0" << endl;
     
     if (!pa.integrityCheck()) { cout << "PlayerAction inconsistent before 'issueSafe'" << endl;; }
   
     if (!integrityCheck()) { cout << "GameState inconsistent before 'issueSafe'" << endl;}
-    for (pair<Unit*, UnitAction>& p : pa.actions) {
-     
-        if (p.first == nullptr) {
+    for (pair<Unit, UnitAction>& p : pa.actions) {
+        cout << "okkkkr1" << endl;
+        if (p.first == Unit::unit_null) {
             // cout<<"Issuing an action to a null unit!!!"<<endl;
             return false;
         }
-        
+        cout << "okkkkr2" << endl;
 
-        if (!p.first->canExecuteAction(p.second, *this)) {
-           
+        if (!p.first.canExecuteAction(p.second, *this)) {
+            cout << "okkkkr3" << endl;
             if (REPORT_ILLEGAL_ACTIONS) {
                  cout << "Issuing a non legal action to unit " + p.second.toString() + "!! Ignoring it..." << endl;
             }
             // replace the action by a NONE action of the same duration:
-          
+            cout << "okkkkr4" << endl;
             int l = p.second.ETA(p.first);
-           
+            cout << "okkkkr5" << endl;
             p.second =  UnitAction(UnitAction::TYPE_NONE, l);
-         
+            cout << "okkkkr6" << endl;
         }
-      
+        cout << "okkkkr66" << endl;
         // get the unit that corresponds to that action (since the state might have been cloned):
-        if (std::find(pgs->getUnits().begin(), pgs->getUnits().end(), p.first) != pgs->getUnits().end()) {
+        if ( pgs->getUnit(p.first.ID) != Unit::unit_null) {
             bool found = false;
-            for (Unit* u : pgs->units) {
+            cout << "okkkkr8" << endl;
+            for (auto &aux : pgs->units) {
+                Unit &u = aux.second;
                 if (//u.getClass() == p.m_a.getClass() &&
                     //                        u.getID() == p.m_a.getID()) {
-                    u->getX() == p.first->getX() &&
-                    u->getY() == p.first->getY()) {
+                    u.getX() == p.first.getX() &&
+                    u.getY() == p.first.getY()) {
                     p.first = u;
                     found = true;
                     break;
                 }
             }
-           
+            cout << "okkkkr9" << endl;
             if (!found) {
-                // cout << "Inconsistent order: pa" << endl;
+                 cout << "Inconsistent order: pa" << endl;
             }
+            cout << "okkkkr10" << endl;
         }
-       
+        cout << "okkkkr11" << endl;
         {
             // check to see if the action is legal!
             ResourceUsage r = p.second.resourceUsage(p.first, pgs);
@@ -299,7 +312,7 @@ bool GameState::issueSafe(PlayerAction& pa){
                 int y = position / pgs->getWidth();
                 int x = position % pgs->getWidth();
                 if (pgs->getTerrain(x, y) != PhysicalGameState::TERRAIN_NONE ||
-                    pgs->getUnitAt(x, y) != nullptr) {
+                    pgs->getUnitAt(x, y) != Unit::unit_null) {
                     UnitAction new_ua =  UnitAction(UnitAction::TYPE_NONE, p.second.ETA(p.first));
                     // cout << "Player " << p.first->getPlayer() << " issued an illegal move action (to " << x + "," << y + ") to unit " + p.first->getID() << " at time " + this->getTime() << ", cancelling and replacing by " + new_ua.toString() << endl;
                     // cout << "    Action: " + p.second.toString() << endl;
@@ -313,7 +326,7 @@ bool GameState::issueSafe(PlayerAction& pa){
 
     }
   
-   
+    cout << "okkkkr22" << endl;
 
     bool returnValue = issue(pa);
     
@@ -337,19 +350,20 @@ void GameState::calculateFree() {
         }
     }
    
-    for (Unit* u : this->pgs->units) {
-        this->_free[u->getX()][u->getY()] = false;
+    for (auto &aux : this->pgs->units) {
+        Unit& u = aux.second;
+        this->_free[u.getX()][u.getY()] = false;
     }
    
     for (auto &Pua : this->unitActions) {
         auto& ua = Pua.second;
-        if (ua.action->type == UnitAction::TYPE_MOVE ||
-            ua.action->type == UnitAction::TYPE_PRODUCE) {
-            Unit *u = ua.unit;
-            if (ua.action->getDirection() == UnitAction::DIRECTION_UP ) this->_free[u->getX()][u->getY()-1] = false;;
-            if (ua.action->getDirection() == UnitAction::DIRECTION_RIGHT ) this->_free[u->getX()+1][u->getY()] = false;
-            if (ua.action->getDirection() == UnitAction::DIRECTION_DOWN ) this->_free[u->getX()][u->getY()+1] = false;
-            if (ua.action->getDirection() == UnitAction::DIRECTION_LEFT ) this->_free[u->getX()-1][u->getY()] = false;
+        if (ua.action.type == UnitAction::TYPE_MOVE ||
+            ua.action.type == UnitAction::TYPE_PRODUCE) {
+            Unit &u = pgs->getUnit(ua.id_unit);
+            if (ua.action.getDirection() == UnitAction::DIRECTION_UP ) this->_free[u.getX()][u.getY()-1] = false;;
+            if (ua.action.getDirection() == UnitAction::DIRECTION_RIGHT ) this->_free[u.getX()+1][u.getY()] = false;
+            if (ua.action.getDirection() == UnitAction::DIRECTION_DOWN ) this->_free[u.getX()][u.getY()+1] = false;
+            if (ua.action.getDirection() == UnitAction::DIRECTION_LEFT ) this->_free[u.getX()-1][u.getY()] = false;
         }
     }
     
@@ -372,16 +386,18 @@ bool GameState::cycle() {
         // cout << uaa.second.unit->toString() << endl;
         // cout << uaa.second.action->toString() << endl;
         // cout << uaa.second.action->ETA(uaa.first) + uaa.second.time  << endl;
-        if (uaa.second.action->ETA(uaa.first) + uaa.second.time <= time) readyToExecute.push_back(uaa.second);
+        Unit& u = pgs->getUnit(uaa.first);
+        if (uaa.second.action.ETA(u) + uaa.second.time <= time) readyToExecute.push_back(uaa.second);
         // cout << "eeee1" << endl;
     }
   
     // execute the actions:
     for (UnitActionAssignment& uaa : readyToExecute) {
-        unitActions.erase(uaa.unit);
+        unitActions.erase(uaa.id_unit);
 
         //            System.out.println("Executing action for " + u + " issued at time " + uaa.time + " with duration " + uaa.action.ETA(uaa.unit));
-        uaa.action->execute(uaa.unit, *this);
+        Unit& u = pgs->getUnit(uaa.id_unit);
+        uaa.action.execute(u, *this);
         
     }
 
@@ -389,21 +405,21 @@ bool GameState::cycle() {
 	return true;
 }
 
-UnitActionAssignment* GameState::getActionAssignment(Unit* u) {
+UnitActionAssignment* GameState::getActionAssignment(Unit &u) {
   
-   auto got = this->unitActions.find(u);
+   auto got = this->unitActions.find(u.ID);
   
    if (got == this->unitActions.end())return nullptr;
    
-    UnitActionAssignment& aux = this->unitActions.at(u);
+    UnitActionAssignment& aux = this->unitActions.at(u.ID);
     
     return &aux;
 }
 
-void GameState::removeUnit(Unit* u) {
-    
+void GameState::removeUnit(Unit &u) {
+    this->unitActions.erase(u.ID);
     this->pgs->removeUnit(u);
 
-    this->unitActions.erase(u);
+    
    
 }

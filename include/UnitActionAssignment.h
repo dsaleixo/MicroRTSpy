@@ -10,13 +10,13 @@ using namespace std;
 
 class UnitActionAssignment {
 public:  
-     Unit *unit;
-     UnitAction *action;
+     long id_unit;
+     UnitAction action;
      int time;
      ~UnitActionAssignment();
-     UnitActionAssignment(Unit* a_unit, UnitAction *a_action, int a_time);
-     Unit* getUnit();
-     UnitAction* getUnitAction();
+     UnitActionAssignment(long a_id, UnitAction &a_action, int a_time);
+     long getIdUnit();
+     UnitAction& getUnitAction();
      int getTime();
 
      string toString();

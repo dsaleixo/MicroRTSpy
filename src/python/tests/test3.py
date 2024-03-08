@@ -1,4 +1,5 @@
 import sys
+from xml.etree.ElementTree import tostring
 
 from ai.abstraction.AbstractionLayerAI import AbstractionLayerAI
 sys.path.append("../..")
@@ -33,7 +34,7 @@ class Test3:
             cont = 0
             utype = utt.getUnitTypeString("Heavy")
            
-            for u in pgs.getUnits():
+            for u in pgs.getUnits().values():
                 
                 if player == 0 and u.getPlayer()==0 and u.getType().getName() == "Heavy" :
                     cont += 1
@@ -44,6 +45,7 @@ class Test3:
             if unit != None and cont <3 :
                 
                 #ai.buildIfNotAlreadyBuilding(unit,utype,u.getX(),u.getY()+1,reservedPositions,p,pgs);
+                print(unit.toString())
                 ai.train(unit, utype)
               
 
@@ -56,7 +58,7 @@ class Test3:
             cont = 0
             utype = utt.getUnitTypeString("Barracks")
             print("ok")
-            for u in pgs.getUnits():
+            for u in pgs.getUnits().values():
                 
                 if player == 0 and u.getPlayer()==0 and u.getType().getName() == "Barracks" :
                     cont += 1
@@ -81,15 +83,18 @@ class Test3:
             unit = None
             base = None
             
-            for u in pgs.getUnits():
+            for u in pgs.getUnits().values():
                 
                 if player == 0 and u.getPlayer()==0 and u.getType().getName() == "Base" :
                     base = u 
                 if player == 0 and u.getPlayer()==0 and u.getType().getName() == "Worker" and gs.getActionAssignment(u)==None:
                     unit = u 
+                if player == 0 and u.getPlayer()==0 and u.getType().getName() == "Worker" and gs.getActionAssignment(u)!=None:
+                    print(gs.getActionAssignment(u).toString())
+                    
                 if u.getPlayer()==-1:
                     target = u
-                 
+            
             if unit != None and target != None and (not unit in ai._actions):
                 ai.harvest(unit, target, base)
                 
@@ -105,7 +110,7 @@ class Test3:
             unit = None
           
             
-            for u in pgs.getUnits():
+            for u in pgs.getUnits().values():
                 
                 
                 if player == 0 and u.getPlayer()==0 and u.getType().getName() == "Heavy" and gs.getActionAssignment(u)==None:
@@ -161,14 +166,18 @@ class Test3:
                 pa0 = Test3.getActions(gs,0,utt)
                 print()
                 print("jogador1")
+            
                 pa1 = Test3.getActions(gs,1,utt)
-                show = gs.updateScream()
                 
-                gs.issueSafe(pa0)
-             
-                gs.issueSafe(pa1)
+                show = gs.updateScream()
+                print("rrrrrs")
                 for a in pa0.getActions():
                     print(a[0].toString(),a[1].toString())
+                gs.issueSafe(pa0)
+                print("rrrrrs1")
+                gs.issueSafe(pa1)
+                print("rrrrrs2")
+                
                 
                 
                 gs.cycle()

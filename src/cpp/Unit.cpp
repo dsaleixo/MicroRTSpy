@@ -1,98 +1,116 @@
 #include "pugixml.hpp"
 #include "Unit.h"
+#include "PhysicalGameState.h"
+#include "GameState.h"
+
 #include "UnitType.h"
 #include <iostream>
 
 long  Unit::next_ID = 0;
 
 
+bool Unit::operator==(const Unit& u)const {
+    return this->ID == u.ID;
+}
+
+bool Unit::operator!=(const Unit& u)const  {
+    return this->ID != u.ID;
+}
+
 Unit::~Unit() {
     this->type = nullptr;
 }
 
-vector<UnitAction>* Unit::getUnitActions(GameState& s) {
-    return  this->getUnitActionsINT(s, 10);
-}
 
 
 vector<UnitAction>* Unit::getUnitActionsINT(GameState& s, int noneDuration){
     vector<UnitAction> *l = new vector< UnitAction>;
-    
+    cout << "s0" << endl;
     PhysicalGameState *pgs = s.getPhysicalGameState();
-    Player p = pgs->getPlayer(this->player);
+    Player &p = pgs->getPlayer(this->player);
 
     
    // Unit uup = pgs.getUnitAt(x,y-1);
     //Unit uright = pgs.getUnitAt(x+1,y);
     //Unit udown = pgs.getUnitAt(x,y+1);
     //Unit uleft = pgs.getUnitAt(x-1,y);
-   
+    cout << "s1" << endl;
    
     // retrieves units around me
-    Unit *uup = nullptr, *uright = nullptr, *udown = nullptr, *uleft = nullptr;
-    for (Unit *u : pgs->getUnits()) {
-        if (u->x == x) {
-            if (u->y == y - 1) {
-                uup = u;
+    Unit *uup = &Unit::unit_null , *uright = &Unit::unit_null, *udown = &Unit::unit_null, *uleft = &Unit::unit_null;
+    for (auto &aux : pgs->units) {
+        Unit& u = aux.second;
+        if (u.x == x) {
+            if (u.y == y - 1) {
+                uup = &u;
             }
-            else if (u->y == y + 1) {
-                udown = u;
+            else if (u.y == y + 1) {
+                udown = &u;
             }
         }
         else {
-            if (u->y == y) {
-                if (u->x == x - 1) {
-                    uleft = u;
+            if (u.y == y) {
+                if (u.x == x - 1) {
+                    uleft = &u;
                 }
-                else if (u->x == x + 1) {
-                    uright = u;
+                else if (u.x == x + 1) {
+                    uright = &u;
                 }
             }
         }
     }
-   
+    cout << "s1" << endl;
     // if this unit can attack, adds an attack action for each unit around it
     if (this->type->canAttack) {
         if (this->type->attackRange == 1) {
 
-            if (y > 0 && uup != nullptr && uup->player != player && uup->player >= 0) l->push_back( UnitAction(UnitAction::TYPE_ATTACK_LOCATION, uup->x, uup->y));
-            if (x < pgs->getWidth() - 1 && uright != nullptr && uright->player != player && uright->player >= 0) l->push_back( UnitAction(UnitAction::TYPE_ATTACK_LOCATION, uright->x, uright->y));
-            if (y < pgs->getHeight() - 1 && udown != nullptr && udown->player != player && udown->player >= 0) l->push_back( UnitAction(UnitAction::TYPE_ATTACK_LOCATION, udown->x, udown->y));
-            if (x > 0 && uleft != nullptr && uleft->player != player && uleft->player >= 0) l->push_back( UnitAction(UnitAction::TYPE_ATTACK_LOCATION, uleft->x, uleft->y));
+            if (y > 0 && *uup != Unit::unit_null && uup->player != player && uup->player >= 0) l->push_back( UnitAction(UnitAction::TYPE_ATTACK_LOCATION, uup->x, uup->y));
+            if (x < pgs->getWidth() - 1 && *uright != Unit::unit_null && uright->player != player && uright->player >= 0) l->push_back( UnitAction(UnitAction::TYPE_ATTACK_LOCATION, uright->x, uright->y));
+            if (y < pgs->getHeight() - 1 && *udown != Unit::unit_null && udown->player != player && udown->player >= 0) l->push_back( UnitAction(UnitAction::TYPE_ATTACK_LOCATION, udown->x, udown->y));
+            if (x > 0 && *uleft != Unit::unit_null && uleft->player != player && uleft->player >= 0) l->push_back( UnitAction(UnitAction::TYPE_ATTACK_LOCATION, uleft->x, uleft->y));
         }
         else {
             int sqrange = this->type->attackRange * this->type->attackRange;
-            for (Unit* u : pgs->getUnits()) {
-                if (u->player < 0 || u->player == player) continue;
-                int sq_dx = (u->x - x) * (u->x - x);
-                int sq_dy = (u->y - y) * (u->y - y);
+            for (auto& aux : pgs->units) {
+                Unit& u = aux.second;
+                if (u.player < 0 || u.player == player) continue;
+                int sq_dx = (u.x - x) * (u.x - x);
+                int sq_dy = (u.y - y) * (u.y - y);
                 if (sq_dx + sq_dy <= sqrange) {
                    
-                    l->push_back( UnitAction(UnitAction::TYPE_ATTACK_LOCATION, u->getX(), u->getY()));
+                    l->push_back( UnitAction(UnitAction::TYPE_ATTACK_LOCATION, u.getX(), u.getY()));
                 }
             }
         }
     }
-    
+    cout << "s2" << endl;
     // if this unit can harvest, adds a harvest action for each resource around it
     // if it is already carrying resources, adds a return action for each allied base around it
     if (this->type->canHarvest) {
         // harvest:
+        cout << "s0" << endl;
         if (resources == 0) {
-            if (y > 0 && uup != nullptr && uup->type->isResource) l->push_back( UnitAction(UnitAction::TYPE_HARVEST, UnitAction::DIRECTION_UP));
-            if (x < pgs->getWidth() - 1 && uright != nullptr && uright->type->isResource) l->push_back( UnitAction(UnitAction::TYPE_HARVEST, UnitAction::DIRECTION_RIGHT));
-            if (y < pgs->getHeight() - 1 && udown != nullptr && udown->type->isResource) l->push_back( UnitAction(UnitAction::TYPE_HARVEST, UnitAction::DIRECTION_DOWN));
-            if (x > 0 && uleft != nullptr && uleft->type->isResource) l->push_back( UnitAction(UnitAction::TYPE_HARVEST, UnitAction::DIRECTION_LEFT));
+            cout << "s1" << endl;
+            if (y > 0 && *uup != Unit::unit_null && uup->type->isResource) l->push_back( UnitAction(UnitAction::TYPE_HARVEST, UnitAction::DIRECTION_UP));
+            cout << "s2" << endl;
+            if (x < pgs->getWidth() - 1 && *uright != Unit::unit_null && uright->type->isResource) l->push_back( UnitAction(UnitAction::TYPE_HARVEST, UnitAction::DIRECTION_RIGHT));
+            cout << "s3" << endl;
+            if (y < pgs->getHeight() - 1 && *udown != Unit::unit_null && udown->type->isResource) l->push_back( UnitAction(UnitAction::TYPE_HARVEST, UnitAction::DIRECTION_DOWN));
+            cout << "s4" << endl;
+            if (x > 0 && *uleft != Unit::unit_null && uleft->type->isResource) l->push_back( UnitAction(UnitAction::TYPE_HARVEST, UnitAction::DIRECTION_LEFT));
+            cout << "s5" << endl;
         }
         // return:
+        cout << "s6" << endl;
         if (resources > 0) {
-            if (y > 0 && uup != nullptr && uup->type->isStockpile && uup->player == player) l->push_back( UnitAction(UnitAction::TYPE_RETURN, UnitAction::DIRECTION_UP));
-            if (x < pgs->getWidth() - 1 && uright != nullptr && uright->type->isStockpile && uright->player == player) l->push_back( UnitAction(UnitAction::TYPE_RETURN, UnitAction::DIRECTION_RIGHT));
-            if (y < pgs->getHeight() - 1 && udown != nullptr && udown->type->isStockpile && udown->player == player) l->push_back( UnitAction(UnitAction::TYPE_RETURN, UnitAction::DIRECTION_DOWN));
-            if (x > 0 && uleft != nullptr && uleft->type->isStockpile && uleft->player == player) l->push_back( UnitAction(UnitAction::TYPE_RETURN, UnitAction::DIRECTION_LEFT));
+            if (y > 0 && *uup != Unit::unit_null && uup->type->isStockpile && uup->player == player) l->push_back( UnitAction(UnitAction::TYPE_RETURN, UnitAction::DIRECTION_UP));
+            if (x < pgs->getWidth() - 1 && *uright != Unit::unit_null && uright->type->isStockpile && uright->player == player) l->push_back( UnitAction(UnitAction::TYPE_RETURN, UnitAction::DIRECTION_RIGHT));
+            if (y < pgs->getHeight() - 1 && *udown != Unit::unit_null && udown->type->isStockpile && udown->player == player) l->push_back( UnitAction(UnitAction::TYPE_RETURN, UnitAction::DIRECTION_DOWN));
+            if (x > 0 && *uleft != Unit::unit_null && uleft->type->isStockpile && uleft->player == player) l->push_back( UnitAction(UnitAction::TYPE_RETURN, UnitAction::DIRECTION_LEFT));
         }
+        cout << "s7" << endl;
     }
-   
+    cout << "s3" << endl;
     // if the player has enough resources, adds a produce action for each type this unit produces.
     // a produce action is added for each free tile around the producer 
     for (UnitType *ut : this->type->produces_v) {
@@ -102,13 +120,13 @@ vector<UnitAction>* Unit::getUnitActionsINT(GameState& s, int noneDuration){
             int tdown = (y < pgs->getHeight() - 1 ? pgs->getTerrain(x, y + 1) : PhysicalGameState::TERRAIN_WALL);
             int tleft = (x > 0 ? pgs->getTerrain(x - 1, y) : PhysicalGameState::TERRAIN_WALL);
 
-            if (tup == PhysicalGameState::TERRAIN_NONE && pgs->getUnitAt(x, y - 1) == nullptr) l->push_back( UnitAction(UnitAction::TYPE_PRODUCE, UnitAction::DIRECTION_UP, ut));
-            if (tright == PhysicalGameState::TERRAIN_NONE && pgs->getUnitAt(x + 1, y) == nullptr) l->push_back( UnitAction(UnitAction::TYPE_PRODUCE, UnitAction::DIRECTION_RIGHT, ut));
-            if (tdown == PhysicalGameState::TERRAIN_NONE && pgs->getUnitAt(x, y + 1) == nullptr) l->push_back( UnitAction(UnitAction::TYPE_PRODUCE, UnitAction::DIRECTION_DOWN, ut));
-            if (tleft == PhysicalGameState::TERRAIN_NONE && pgs->getUnitAt(x - 1, y) == nullptr) l->push_back( UnitAction(UnitAction::TYPE_PRODUCE, UnitAction::DIRECTION_LEFT, ut));
+            if (tup == PhysicalGameState::TERRAIN_NONE && pgs->getUnitAt(x, y - 1) == Unit::unit_null) l->push_back( UnitAction(UnitAction::TYPE_PRODUCE, UnitAction::DIRECTION_UP, ut));
+            if (tright == PhysicalGameState::TERRAIN_NONE && pgs->getUnitAt(x + 1, y) == Unit::unit_null) l->push_back( UnitAction(UnitAction::TYPE_PRODUCE, UnitAction::DIRECTION_RIGHT, ut));
+            if (tdown == PhysicalGameState::TERRAIN_NONE && pgs->getUnitAt(x, y + 1) == Unit::unit_null) l->push_back( UnitAction(UnitAction::TYPE_PRODUCE, UnitAction::DIRECTION_DOWN, ut));
+            if (tleft == PhysicalGameState::TERRAIN_NONE && pgs->getUnitAt(x - 1, y) == Unit::unit_null) l->push_back( UnitAction(UnitAction::TYPE_PRODUCE, UnitAction::DIRECTION_LEFT, ut));
         }
     }
-    
+    cout << "s4" << endl;
     // if the unit can move, adds a move action for each free tile around it
     if (this->type->canMove) {
         int tup = (y > 0 ? pgs->getTerrain(x, y - 1) : PhysicalGameState::TERRAIN_WALL);
@@ -116,12 +134,12 @@ vector<UnitAction>* Unit::getUnitActionsINT(GameState& s, int noneDuration){
         int tdown = (y < pgs->getHeight() - 1 ? pgs->getTerrain(x, y + 1) : PhysicalGameState::TERRAIN_WALL);
         int tleft = (x > 0 ? pgs->getTerrain(x - 1, y) : PhysicalGameState::TERRAIN_WALL);
 
-        if (tup == PhysicalGameState::TERRAIN_NONE && uup == nullptr) l->push_back( UnitAction(UnitAction::TYPE_MOVE, UnitAction::DIRECTION_UP));
-        if (tright == PhysicalGameState::TERRAIN_NONE && uright == nullptr) l->push_back( UnitAction(UnitAction::TYPE_MOVE, UnitAction::DIRECTION_RIGHT));
-        if (tdown == PhysicalGameState::TERRAIN_NONE && udown == nullptr) l->push_back( UnitAction(UnitAction::TYPE_MOVE, UnitAction::DIRECTION_DOWN));
-        if (tleft == PhysicalGameState::TERRAIN_NONE && uleft == nullptr) l->push_back( UnitAction(UnitAction::TYPE_MOVE, UnitAction::DIRECTION_LEFT));
+        if (tup == PhysicalGameState::TERRAIN_NONE && *uup == Unit::unit_null) l->push_back( UnitAction(UnitAction::TYPE_MOVE, UnitAction::DIRECTION_UP));
+        if (tright == PhysicalGameState::TERRAIN_NONE && *uright == Unit::unit_null) l->push_back( UnitAction(UnitAction::TYPE_MOVE, UnitAction::DIRECTION_RIGHT));
+        if (tdown == PhysicalGameState::TERRAIN_NONE && *udown == Unit::unit_null) l->push_back( UnitAction(UnitAction::TYPE_MOVE, UnitAction::DIRECTION_DOWN));
+        if (tleft == PhysicalGameState::TERRAIN_NONE && *uleft == Unit::unit_null) l->push_back( UnitAction(UnitAction::TYPE_MOVE, UnitAction::DIRECTION_LEFT));
     }
-   
+    cout << "s5" << endl;
     // units can always stay idle:
     l->push_back( UnitAction(UnitAction::TYPE_NONE, noneDuration));
     
@@ -132,11 +150,11 @@ vector<UnitAction>* Unit::getUnitActionsINT(GameState& s, int noneDuration){
 
 bool Unit::canExecuteAction(UnitAction& ua, GameState& gs) {
    
-
-    vector<UnitAction> *l = getUnitActionsINT(gs, ua.ETA(this));
-    
+    cout << "xx0" << endl;
+    vector<UnitAction> *l = getUnitActionsINT(gs, ua.ETA(*this));
+    cout << "xx0" << endl;
    // bool aux = std::find(l->begin(), l->end(), ua) == l->end();
-  
+    cout << "xx1" << endl;
     for (auto& it : *l) {
         
         
@@ -147,13 +165,24 @@ bool Unit::canExecuteAction(UnitAction& ua, GameState& gs) {
         
         
     }
-  
+    cout << "xx1" << endl;
     delete l;
     return false;
     
     
 }
 
+
+
+Unit::Unit() {
+    this->player = -1;
+    this->type = nullptr;
+    this->x = -1;
+    this->y = -1;
+    this->resources = -1;
+    this->hitpoints = -1;
+    this->ID = -1;
+}
 
 
 /**
@@ -177,7 +206,7 @@ Unit::Unit(long a_ID, int a_player, UnitType *a_type, int a_x, int a_y, int a_re
     if (ID >= next_ID) this->next_ID = ID + 1;
   
 }
-
+Unit Unit::unit_null =  Unit();
 /**
  * Creates a unit without specifying its ID. It is automatically assigned from
  * {@link #next_ID}, which is incremented.
@@ -233,11 +262,16 @@ Unit::Unit(const Unit &other) {
     
 }
 
+
+
+
+
+
 /**
  * Returns the owner ID
  * @return
  */
-int Unit::getPlayer() {
+int Unit::getPlayer() const {
     return this->player;
 }
 
@@ -296,7 +330,7 @@ int Unit::getPosition(PhysicalGameState &pgs) {
  * Returns the x coordinate
  * @return
  */
-int Unit::getX() {
+int Unit::getX() const {
     return this->x;
 }
 
@@ -304,7 +338,7 @@ int Unit::getX() {
  * Returns the y coordinate
  * @return
  */
-int Unit::getY() {
+int Unit::getY() const {
     return this->y;
 }
 
@@ -433,12 +467,12 @@ int Unit::getHarvestTime() {
  * An idle action for 10 cycles is always generated
  * @param s
  * @return
- 
-vector<UnitAction> Unit::getUnitActions(GameState &s) {
+ */
+vector<UnitAction>* Unit::getUnitActions(GameState &s) {
     // Unless specified, generate "NONE" actions with duration 10 cycles
-    return this->getUnitActions(s, 10);
+    return this->getUnitActionsINT(s, 10);
 }
-*/
+
 
 
 /**
@@ -461,7 +495,8 @@ string Unit::toString() {
 
 
  Unit& Unit::clone() {
-    return  Unit(*this);
+     auto u = Unit(*this);
+    return u;
 }
 
 /**
@@ -514,7 +549,7 @@ public void toJSON(Writer w) throws Exception {
  * @param utt
  * @return
  */
- Unit* Unit::fromXML(pugi::xml_node &e, UnitTypeTable &utt) {
+ Unit Unit::fromXML(pugi::xml_node &e, UnitTypeTable &utt) {
     string typeName = e.attribute("type").as_string();
     string IDStr = e.attribute("ID").as_string();
     string playerStr = e.attribute("player").as_string();
@@ -534,9 +569,9 @@ public void toJSON(Writer w) throws Exception {
     int resources = atol(resourcesStr.c_str());
     int hitpoints = atol(hitpointsStr.c_str());
 
-    Unit *u = new  Unit(ID, player, type, x, y, resources);
+    Unit u =   Unit(ID, player, type, x, y, resources);
  
-    u->hitpoints = hitpoints;
+    u.hitpoints = hitpoints;
     
     return u;
 }

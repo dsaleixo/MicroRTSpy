@@ -1,6 +1,6 @@
 ^C:\PROJETOS\MICRORTS_CPP\BUILD\TEMP.WIN-AMD64-CPYTHON-311\RELEASE\MICRORTSPY\CMAKEFILES\D20E9C20819A53208DBC7366AA8CF999\GENERATE.STAMP.RULE
 setlocal
-"C:\Users\Gilmar Aleixo\AppData\Local\Temp\pip-build-env-gthnh_mp\overlay\Lib\site-packages\cmake\data\bin\cmake.exe" -SC:/projetos/MicroRTS_cpp -BC:/projetos/MicroRTS_cpp/build/temp.win-amd64-cpython-311/Release/MicroRTSpy --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/projetos/MicroRTS_cpp/build/temp.win-amd64-cpython-311/Release/MicroRTSpy/MicroRTS_CPP.sln
+"C:\Users\Gilmar Aleixo\AppData\Local\Temp\pip-build-env-zaehragd\overlay\Lib\site-packages\cmake\data\bin\cmake.exe" -SC:/projetos/MicroRTS_cpp -BC:/projetos/MicroRTS_cpp/build/temp.win-amd64-cpython-311/Release/MicroRTSpy --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/projetos/MicroRTS_cpp/build/temp.win-amd64-cpython-311/Release/MicroRTSpy/MicroRTS_CPP.sln
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

@@ -62,35 +62,35 @@ add_library(pugixml::static STATIC IMPORTED)
 
 set_target_properties(pugixml::static PROPERTIES
   INTERFACE_COMPILE_DEFINITIONS "\$<\$<BOOL:OFF>:PUGIXML_WCHAR_MODE>;\$<\$<BOOL:OFF>:PUGIXML_COMPACT>;\$<\$<BOOL:OFF>:PUGIXML_NO_XPATH>;\$<\$<BOOL:OFF>:PUGIXML_NO_STL>;\$<\$<BOOL:OFF>:PUGIXML_NO_EXCEPTIONS>"
-  INTERFACE_INCLUDE_DIRECTORIES "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/src"
+  INTERFACE_INCLUDE_DIRECTORIES "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/src"
 )
 
 # Import target "pugixml::static" for configuration "Debug"
 set_property(TARGET pugixml::static APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
 set_target_properties(pugixml::static PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_DEBUG "CXX"
-  IMPORTED_LOCATION_DEBUG "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/Debug/pugixml.lib"
+  IMPORTED_LOCATION_DEBUG "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/Debug/pugixml.lib"
   )
 
 # Import target "pugixml::static" for configuration "Release"
 set_property(TARGET pugixml::static APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(pugixml::static PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/Release/pugixml.lib"
+  IMPORTED_LOCATION_RELEASE "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/Release/pugixml.lib"
   )
 
 # Import target "pugixml::static" for configuration "MinSizeRel"
 set_property(TARGET pugixml::static APPEND PROPERTY IMPORTED_CONFIGURATIONS MINSIZEREL)
 set_target_properties(pugixml::static PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_MINSIZEREL "CXX"
-  IMPORTED_LOCATION_MINSIZEREL "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/MinSizeRel/pugixml.lib"
+  IMPORTED_LOCATION_MINSIZEREL "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/MinSizeRel/pugixml.lib"
   )
 
 # Import target "pugixml::static" for configuration "RelWithDebInfo"
 set_property(TARGET pugixml::static APPEND PROPERTY IMPORTED_CONFIGURATIONS RELWITHDEBINFO)
 set_target_properties(pugixml::static PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_RELWITHDEBINFO "CXX"
-  IMPORTED_LOCATION_RELWITHDEBINFO "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/RelWithDebInfo/pugixml.lib"
+  IMPORTED_LOCATION_RELWITHDEBINFO "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/RelWithDebInfo/pugixml.lib"
   )
 
 # This file does not depend on other imported targets which have

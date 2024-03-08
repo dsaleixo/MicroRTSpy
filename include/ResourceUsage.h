@@ -2,7 +2,8 @@
 #define ResourceUsage_H  
 class ResourceUsage;
 class UnitAction;
-#include "GameState.h"
+class GameState;
+
 #include <vector>
 #include <string>
 

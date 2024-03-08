@@ -47,7 +47,7 @@ class AbstractionLayerAI:
         toDelete = []
         ru =  ResourceUsage();
         for  aa in self._actions.values():
-            if not aa.getUnit() in pgs.getUnits():
+            if not aa.getUnit().getID() in pgs.getUnits():
                 # The unit is dead:
                 toDelete.remove(aa._unit)
             else :
@@ -56,6 +56,7 @@ class AbstractionLayerAI:
                 else :
                     if gs.getActionAssignment(aa._unit) == None:
                         ua = aa.execute(gs, ru)
+                        
                         if ua != None:
                             if AbstractionLayerAI.VERIFY_ACTION_CORRECTNESS:
                                 # verify that the action is actually feasible:
@@ -65,8 +66,9 @@ class AbstractionLayerAI:
                                 
                             else :
                                 desires.append((aa._unit, ua))
-                            
+                               
                             ru.merge(ua.resourceUsage(aa._unit, pgs))
+                            
           
         for  u in toDelete:
             self._actions.remove(u);
@@ -82,9 +84,10 @@ class AbstractionLayerAI:
             if pa.consistentWith(r2, gs):
                 pa.addUnitAction(desire[0], desire[1])
                 pa.getResourceUsage().merge(r2)
-         
+        
         #pa.fillWithNones(gs, player, 10)
         
+  
         return pa
     
     def getAbstractAction(self, u : Unit) :

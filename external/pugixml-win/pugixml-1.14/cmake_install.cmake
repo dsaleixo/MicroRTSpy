@@ -1,4 +1,4 @@
-# Install script for directory: C:/projetos/MicroRTS_cpp/external/pugixml-1.14
+# Install script for directory: C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,13 +34,13 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Development" OR NOT CMAKE_INSTALL_COMPONENT)
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/Debug/pugixml.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/Debug/pugixml.lib")
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/Release/pugixml.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/Release/pugixml.lib")
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/MinSizeRel/pugixml.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/MinSizeRel/pugixml.lib")
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/RelWithDebInfo/pugixml.lib")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/RelWithDebInfo/pugixml.lib")
   endif()
 endif()
 
@@ -48,7 +48,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Development" OR NOT CMAKE_INSTALL_COMPONENT
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/pugixml/pugixml-targets.cmake")
     file(DIFFERENT _cmake_export_file_changed FILES
          "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/pugixml/pugixml-targets.cmake"
-         "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/Export/be764272e56105fc8ff11fec8314e604/pugixml-targets.cmake")
+         "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/CMakeFiles/Export/be764272e56105fc8ff11fec8314e604/pugixml-targets.cmake")
     if(_cmake_export_file_changed)
       file(GLOB _cmake_old_config_files "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/cmake/pugixml/pugixml-targets-*.cmake")
       if(_cmake_old_config_files)
@@ -61,52 +61,52 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Development" OR NOT CMAKE_INSTALL_COMPONENT
     endif()
     unset(_cmake_export_file_changed)
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/pugixml" TYPE FILE FILES "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/Export/be764272e56105fc8ff11fec8314e604/pugixml-targets.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/pugixml" TYPE FILE FILES "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/CMakeFiles/Export/be764272e56105fc8ff11fec8314e604/pugixml-targets.cmake")
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/pugixml" TYPE FILE FILES "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/Export/be764272e56105fc8ff11fec8314e604/pugixml-targets-debug.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/pugixml" TYPE FILE FILES "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/CMakeFiles/Export/be764272e56105fc8ff11fec8314e604/pugixml-targets-debug.cmake")
   endif()
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/pugixml" TYPE FILE FILES "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/Export/be764272e56105fc8ff11fec8314e604/pugixml-targets-minsizerel.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/pugixml" TYPE FILE FILES "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/CMakeFiles/Export/be764272e56105fc8ff11fec8314e604/pugixml-targets-minsizerel.cmake")
   endif()
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/pugixml" TYPE FILE FILES "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/Export/be764272e56105fc8ff11fec8314e604/pugixml-targets-relwithdebinfo.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/pugixml" TYPE FILE FILES "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/CMakeFiles/Export/be764272e56105fc8ff11fec8314e604/pugixml-targets-relwithdebinfo.cmake")
   endif()
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/pugixml" TYPE FILE FILES "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/CMakeFiles/Export/be764272e56105fc8ff11fec8314e604/pugixml-targets-release.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/pugixml" TYPE FILE FILES "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/CMakeFiles/Export/be764272e56105fc8ff11fec8314e604/pugixml-targets-release.cmake")
   endif()
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Development" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/cmake/pugixml" TYPE FILE FILES
-    "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/pugixml-config-version.cmake"
-    "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/pugixml-config.cmake"
+    "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/pugixml-config-version.cmake"
+    "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/pugixml-config.cmake"
     )
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Development" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/pugixml.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/pugixml.pc")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Development" OR NOT CMAKE_INSTALL_COMPONENT)
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
     file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE FILE FILES
-      "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/src/pugiconfig.hpp"
-      "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/src/pugixml.hpp"
+      "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/src/pugiconfig.hpp"
+      "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/src/pugixml.hpp"
       )
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
     file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE FILE FILES
-      "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/src/pugiconfig.hpp"
-      "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/src/pugixml.hpp"
+      "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/src/pugiconfig.hpp"
+      "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/src/pugixml.hpp"
       )
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
     file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE FILE FILES
-      "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/src/pugiconfig.hpp"
-      "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/src/pugixml.hpp"
+      "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/src/pugiconfig.hpp"
+      "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/src/pugixml.hpp"
       )
   elseif(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
     file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE FILE FILES
-      "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/src/pugiconfig.hpp"
-      "C:/projetos/MicroRTS_cpp/external/pugixml-1.14/src/pugixml.hpp"
+      "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/src/pugiconfig.hpp"
+      "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14/src/pugixml.hpp"
       )
   endif()
 endif()

@@ -6,9 +6,10 @@ class Attack(AbstractAction):
 
     
     def __init__(self,  u : Unit,  a_target : Unit,  a_pf : AStarPathFinding) :
-        super().__init__(u);
-        self._target = a_target;
-        self._pf = a_pf;
+        super().__init__(u)
+        
+        self._target = a_target
+        self._pf = a_pf
     
     
     

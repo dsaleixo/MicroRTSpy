@@ -19,7 +19,7 @@ public:
     /**
      * A list of unit actions
      */
-    vector<pair<Unit*, UnitAction>> actions;
+    vector<pair<Unit, UnitAction>> actions;
    
     /**
      * Represents the resources used by the player action
@@ -79,14 +79,14 @@ public:
      * @param u
      * @param a
      */
-     void addUnitAction(Unit *u, UnitAction a);
+     void addUnitAction(Unit &u, UnitAction &a);
 
     /**
      * Removes a pair of Unit and UnitAction from the list
      * @param u
      * @param a
      */
-     //void removeUnitAction(Unit *u, UnitAction a);
+     //void removeUnitAction(Unit &u, UnitAction &a);
 
     /**
      * Merges this with another PlayerAction
@@ -101,7 +101,7 @@ public:
      * @return
      */
 
-     vector<pair<Unit*, UnitAction>>& getActions();
+     vector<pair<Unit, UnitAction>>& getActions();
 
     /**
      * Searches for the unit in the collection and returns the respective {@link UnitAction}
@@ -109,7 +109,7 @@ public:
      * @return
      */
 
-     //UnitAction getAction(Unit *u);
+     UnitAction getAction(Unit &u);
 
     /**
      * @param lu

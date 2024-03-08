@@ -1,6 +1,6 @@
 #include "PlayerAction.h"
-
-vector<pair<Unit*, UnitAction>>& PlayerAction::getActions() {
+#include "GameState.h"
+vector<pair<Unit, UnitAction>>& PlayerAction::getActions() {
 	return this->actions;
 }
 
@@ -15,9 +15,10 @@ bool PlayerAction::consistentWith(ResourceUsage &u, GameState* gs) {
 
 void PlayerAction::fillWithNones(GameState* s, int pID, int duration) {
 	PhysicalGameState *pgs = s->getPhysicalGameState();
-	for (Unit* u : pgs->getUnits()) {
-		if (u->getPlayer() == pID) {
-			if (s->unitActions.find(u) == s->unitActions.end()) {
+	for (auto& aux : pgs->getUnits()) {
+		Unit& u = aux.second;
+		if (u.getPlayer() == pID) {
+			if (s->unitActions.find(u.ID) == s->unitActions.end()) {
 				bool found = false;
 				for (auto& pa : this->actions) {
 					if (pa.first == u) {
@@ -37,7 +38,7 @@ ResourceUsage* PlayerAction::getResourceUsage() {
 	return this->r;
 }
 
-void PlayerAction::addUnitAction(Unit* u, UnitAction a) {
+void PlayerAction::addUnitAction(Unit &u, UnitAction &a) {
 	this->actions.push_back(make_pair<>(u, a));
 }
 
@@ -45,13 +46,13 @@ void PlayerAction::addUnitAction(Unit* u, UnitAction a) {
 bool PlayerAction::integrityCheck() {
 	int player = -1;
 	
-	for (pair<Unit*, UnitAction> uaa : actions) {
-		Unit *u = uaa.first;
+	for (pair<Unit, UnitAction>& uaa : actions) {
+		Unit& u = uaa.first;
 		if (player == -1) {
-			player = u->getPlayer();
+			player = u.getPlayer();
 		}
 		else {
-			if (player != u->getPlayer()) {
+			if (player != u.getPlayer()) {
 				cout << "integrityCheck: units from more than one player!" << endl;
 				return false;
 			}

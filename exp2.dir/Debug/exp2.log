@@ -1,3 +1,0 @@
-﻿  Building Custom Rule C:/projetos/MicroRTS_cpp/CMakeLists.txt
-  main2.cpp
-LINK : fatal error LNK1104: não é possível abrir o arquivo 'Debug\MicroRTScpp.lib'

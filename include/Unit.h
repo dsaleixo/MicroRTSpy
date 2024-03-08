@@ -2,11 +2,12 @@
 #ifndef UNIT_H // include guard
 #define UNIT_H
 
+class GameState;
+class UnitAction;
 #include "UnitType.h"
 #include "UnitTypeTable.h"
 #include "pugixml.hpp"
-#include "GameState.h"
-#include "UnitAction.h"
+
 
 #include "string"
 
@@ -18,9 +19,15 @@ using namespace std;
  */
 
 
+
+
+
 class Unit {
 
 	public:
+
+        static Unit unit_null;
+
         /*
          *The type of this unit(worker, ranged, barracks, etc.)
          */
@@ -73,7 +80,9 @@ class Unit {
          */
 
         Unit();
-
+        
+        bool operator==(const Unit& u)const ;
+        bool operator!=(const Unit& u) const;
         Unit(long a_ID, int a_player, UnitType *a_type, int a_x, int a_y, int a_resources);
 
         /**
@@ -106,7 +115,7 @@ class Unit {
          * Returns the owner ID
          * @return
          */
-        int getPlayer();
+        int getPlayer() const;
 
         /**
          * Returns the type
@@ -148,13 +157,13 @@ class Unit {
          * Returns the x coordinate
          * @return
          */
-        int getX();
+        int getX() const;
 
         /**
          * Returns the y coordinate
          * @return
          */
-        int getY();
+        int getY() const ;
 
         /**
          * Sets x coordinate
@@ -319,7 +328,7 @@ class Unit {
          * @param utt
          * @return
          */
-        static  Unit* fromXML(pugi::xml_node &e, UnitTypeTable &utt);
+        static  Unit fromXML(pugi::xml_node &e, UnitTypeTable &utt);
 
         /**
          * Constructs a unit from a JSON object
@@ -331,6 +340,7 @@ class Unit {
         */
 
 };
+
 
 
 #endif

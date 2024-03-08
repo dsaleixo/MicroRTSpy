@@ -1,4 +1,6 @@
 #include "ResourceUsage.h"
+#include "GameState.h"
+#include <algorithm>
 
 
 void ResourceUsage::merge(ResourceUsage& other) {
@@ -18,7 +20,7 @@ ResourceUsage::ResourceUsage() {
 bool ResourceUsage::consistentWith(ResourceUsage &anotherUsage, GameState* gs) {
 
  
-    for (int pos : anotherUsage.positionsUsed) {
+    for (int& pos : anotherUsage.positionsUsed) {
         if (std::find(this->positionsUsed.begin(), this->positionsUsed.end(), pos) != this->positionsUsed.end()) {
             return false;
         }

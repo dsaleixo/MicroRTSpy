@@ -187,7 +187,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{454C3448-CFBF-39EC-98FA-F90FB82195F0}</Project>
       <Name>exp2</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\projetos\MicroRTS_cpp\external\pugixml-1.14\pugixml-static.vcxproj">
+    <ProjectReference Include="C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\pugixml-static.vcxproj">
       <Project>{37FA108C-301C-30F3-B3B0-1EECE6C2052B}</Project>
       <Name>pugixml-static</Name>
     </ProjectReference>

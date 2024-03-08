@@ -7,11 +7,10 @@ class PhysicalGameState;
 class UnitAction;
 class UnitActionAssignment;
 #include <string>
-#include "ResourceUsage.h"
+
 #include "Unit.h"
 #include "UnitType.h"
-#include "PhysicalGameState.h"
-#include "GameState.h"
+
 
 using namespace std;
 
@@ -177,7 +176,7 @@ public:
     UnitAction(const UnitAction &other);
     UnitAction();
    
-    bool equals(UnitAction o);
+    bool equals(UnitAction &o);
 
 
      int hashCode();
@@ -204,7 +203,7 @@ public:
      * @param pgs
      * @return
      */
-     ResourceUsage resourceUsage(Unit *u, PhysicalGameState *pgs);
+     ResourceUsage resourceUsage(Unit &u, PhysicalGameState *pgs);
 
     
 
@@ -217,7 +216,7 @@ public:
      * @param u
      * @return
      */
-       int ETA(Unit *u);
+       int ETA(Unit &u);
 
     /**
      * Effects this action in the game state. If the action is related to a
@@ -226,7 +225,7 @@ public:
      * @param u
      * @param s
      */
-        void execute(Unit *u, GameState& s);
+        void execute(Unit &u, GameState& s);
 
         string toString();
 

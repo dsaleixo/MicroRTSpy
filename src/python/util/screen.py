@@ -102,7 +102,7 @@ class ScreenMicroRTS:
           
     def drawUnits(self):
         
-        for u in self._pgs.getUnits():
+        for u in self._pgs.getUnits().values():
             
             uaa = self._gs.getActionAssignment(u)
             
@@ -145,11 +145,11 @@ class ScreenMicroRTS:
                             self.t([u.getX()*self._grid+self._grid/2, u.getY()*self._grid+self._grid/2]), 
                             self.t([u.getX()*self._grid+self._grid/2 + offsx, u.getY()*self._grid+self._grid/2 + offsy]), 3)
                      # draw building progress bar
-                    ETA = uaa.getTime() + uaa.getUnitAction().ETA(uaa.getUnit()) - self._gs.getTime();
+                    ETA = uaa.getTime() + uaa.getUnitAction().ETA(u) - self._gs.getTime();
                     p = self.t([u.getX() * self._grid + offsx, u.getY() * self._grid + offsy])
                     pygame.draw.rect(self._window, self._blue, 
                                       [p[0], p[1], 
-                                       self._grid - int(self._grid * (ETA / uaa.getUnitAction().ETA(uaa.getUnit()))), 
+                                       self._grid - int(self._grid * (ETA / uaa.getUnitAction().ETA(u))), 
                                        (self._grid / 5.0)])
                  
 

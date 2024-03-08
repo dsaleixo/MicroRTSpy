@@ -98,7 +98,7 @@ class Train(AbstractAction):
                 
         if self._type.getcanHarvest():
             # score is minus distance to closest resource
-            for  u in pgs.getUnits():
+            for  u in pgs.getUnits().values():
                 if u.getType().getisResource():
                     d = abs(u.getX() - x) + abs(u.getY() - y);
                     if first or d<distance:
@@ -106,7 +106,7 @@ class Train(AbstractAction):
                         first = False;
         else :
             # score is minus distance to closest enemy
-            for  u  in pgs.getUnits():
+            for  u  in pgs.getUnits().values():
                 if u.getPlayer()>=0 and u.getPlayer()!=player:
                     d = abs(u.getX() - x) + abs(u.getY() - y);
                     if first or d<distance:

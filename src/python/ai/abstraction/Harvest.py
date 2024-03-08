@@ -52,11 +52,13 @@ class Harvest(AbstractAction):
             move = self._pf.findPathToAdjacentPosition(self._unit, self._target.getX()+self._target.getY()*gs.getPhysicalGameState().getWidth(), gs);
             print("aki ",move.toString())
             if move.getType()!=UnitAction.getTYPE_NONE():
+                
                 if gs.isUnitActionAllowed(self._unit, move):
+                    print("aki ",move.toString(),self._unit.toString())
                     return move;
                 return None
             
-
+            
             # harvest:
             if self._target.getX() == self._unit.getX() and self._target.getY() == self._unit.getY()-1 :
                 return  UnitAction(UnitAction.getTYPE_HARVEST(),UnitAction.getDIRECTION_UP());

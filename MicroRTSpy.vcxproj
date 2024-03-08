@@ -86,7 +86,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /external:I "C:/projetos/MicroRTS_cpp/external/pybind11/include" /external:I "C:/miniconda3/Include" /bigobj</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -105,10 +105,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\";MicroRTSpy_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -116,7 +116,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>Debug\MicroRTScpp.lib;C:\miniconda3\libs\python311.lib;external\pugixml-1.14\Debug\pugixml.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>Debug\MicroRTScpp.lib;C:\miniconda3\libs\python311.lib;external\pugixml-win\pugixml-1.14\Debug\pugixml.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -131,7 +131,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /external:I "C:/projetos/MicroRTS_cpp/external/pybind11/include" /external:I "C:/miniconda3/Include" /bigobj</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -152,10 +152,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";MicroRTSpy_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -163,7 +163,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>Release\MicroRTScpp.lib;C:\miniconda3\libs\python311.lib;external\pugixml-1.14\Release\pugixml.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>Release\MicroRTScpp.lib;C:\miniconda3\libs\python311.lib;external\pugixml-win\pugixml-1.14\Release\pugixml.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -179,7 +179,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /external:I "C:/projetos/MicroRTS_cpp/external/pybind11/include" /external:I "C:/miniconda3/Include" /bigobj</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -200,10 +200,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";MicroRTSpy_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -211,7 +211,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>MinSizeRel\MicroRTScpp.lib;C:\miniconda3\libs\python311.lib;external\pugixml-1.14\MinSizeRel\pugixml.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>MinSizeRel\MicroRTScpp.lib;C:\miniconda3\libs\python311.lib;external\pugixml-win\pugixml-1.14\MinSizeRel\pugixml.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -227,7 +227,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /external:I "C:/projetos/MicroRTS_cpp/external/pybind11/include" /external:I "C:/miniconda3/Include" /bigobj</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -246,10 +246,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";MicroRTSpy_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\projetos\MicroRTS_cpp\include;C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\src;C:\projetos\MicroRTS_cpp\external\pybind11\include;C:\miniconda3\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -257,7 +257,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>RelWithDebInfo\MicroRTScpp.lib;C:\miniconda3\libs\python311.lib;external\pugixml-1.14\RelWithDebInfo\pugixml.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>RelWithDebInfo\MicroRTScpp.lib;C:\miniconda3\libs\python311.lib;external\pugixml-win\pugixml-1.14\RelWithDebInfo\pugixml.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -341,7 +341,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{F7A6905A-4B20-3304-999D-DC996CF2D198}</Project>
       <Name>MicroRTScpp</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\projetos\MicroRTS_cpp\external\pugixml-1.14\pugixml-static.vcxproj">
+    <ProjectReference Include="C:\projetos\MicroRTS_cpp\external\pugixml-win\pugixml-1.14\pugixml-static.vcxproj">
       <Project>{37FA108C-301C-30F3-B3B0-1EECE6C2052B}</Project>
       <Name>pugixml-static</Name>
     </ProjectReference>

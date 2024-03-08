@@ -14,6 +14,6 @@ if __name__ == '__main__':
     psg = PhysicalGameState.load("../maps/basesWorkers32x32A.xml",utt);
 
     print("Units")
-    for  u in psg.getUnits():
+    for u in psg.getUnits().values():
         print (u.toString());
     

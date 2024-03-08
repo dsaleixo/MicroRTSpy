@@ -5,9 +5,9 @@ class PlayerAction;
 class GameState;
 class UnitActionAssignment;
 #include <unordered_map>
-#include "UnitAction.h"
+
 #include "UnitActionAssignment.h"
-#include "PlayerAction.h"
+
 #include "PhysicalGameState.h"
 
 using namespace std;
@@ -21,7 +21,7 @@ public:
 
     int time = 0;
     PhysicalGameState *pgs;
-    unordered_map<Unit*, UnitActionAssignment> unitActions;
+    unordered_map<long, UnitActionAssignment> unitActions;
     UnitTypeTable *utt;
     bool** _free;
 
@@ -42,7 +42,7 @@ public:
      * Removes a unit from the game
       @param u
      */
-      void removeUnit(Unit* u);
+      void removeUnit(Unit &u);
 
     /**
      * @see PhysicalGameState#getPlayer(int)
@@ -87,7 +87,7 @@ public:
       @return
      */
 
-     UnitActionAssignment* getActionAssignment(Unit* u);
+     UnitActionAssignment* getActionAssignment(Unit &u);
 
     /**
      * Indicates whether all units owned by the players have a valid action or not
@@ -177,7 +177,7 @@ public:
      * @param ua
      * @return
      */
-     bool isUnitActionAllowed(Unit* u, UnitAction &ua);
+     bool isUnitActionAllowed(Unit &u, UnitAction &ua);
 
 
     /**

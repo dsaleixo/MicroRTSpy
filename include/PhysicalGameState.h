@@ -11,6 +11,8 @@ class Unit;
 #include "pugixml.hpp"
 #include "Player.h"
 #include "Unit.h"
+#include "unordered_map"
+
 
 /**
  * The physical game state (the actual 'map') of a microRTS game
@@ -31,11 +33,13 @@ class PhysicalGameState {
      */
     static const  int TERRAIN_WALL=1;
 
+    
+
     int width = 8;
     int height = 8;
     vector<int> terrain = {};
     vector<Player> players;
-    vector<Unit*> units;
+    unordered_map< long,  Unit> units;
 
 
     //destructor
@@ -71,7 +75,7 @@ class PhysicalGameState {
              * @param a_height
              * @param t
              */
-            PhysicalGameState(int a_width, int a_height, vector<int> a_terrain);
+            PhysicalGameState(int a_width, int a_height, vector<int> &a_terrain);
 
         /**
          * @return
@@ -131,7 +135,7 @@ class PhysicalGameState {
          *
          * @param p
          */
-         void addPlayer(Player p);
+         void addPlayer(Player &p);
 
         /**
          * Adds a new {@link Unit} to the map if its position is free
@@ -140,21 +144,21 @@ class PhysicalGameState {
          * @throws IllegalArgumentException if the new unit's position is already
          * occupied
          */
-         void addUnit(Unit* newUnit);
+         void addUnit(Unit &newUnit);
 
         /**
          * Removes a unit from the map
          *
          * @param u
          */
-         void removeUnit(Unit *u);
+         void removeUnit(Unit &u);
 
         /**
          * Returns the list of units in the map
          *
          * @return
          */
-         vector<Unit*>& getUnits();
+         unordered_map<  long, Unit>& getUnits();
 
         /**
          * Returns a list of players
@@ -177,7 +181,7 @@ class PhysicalGameState {
          * @param ID
          * @return
          */
-          Unit* getUnit(long ID);
+          Unit& getUnit(long ID);
 
         /**
          * Returns the {@link Unit} at a given coordinate or null if no unit is
@@ -187,7 +191,7 @@ class PhysicalGameState {
          * @param y
          * @return
          */
-          Unit* getUnitAt(int x, int y);
+           Unit& getUnitAt(int x, int y);
 
         /**
          * Returns the units within a squared area centered in the given coordinates
@@ -273,7 +277,7 @@ class PhysicalGameState {
          * @param pgs
          * @return
          */
-         bool equivalents(PhysicalGameState pgs);
+         bool equivalents(PhysicalGameState &pgs);
 
         /**
          * This function tests if two PhysicalGameStates are identical, including their terrain
@@ -281,7 +285,7 @@ class PhysicalGameState {
          * @param pgs
          * @return
          */
-         bool equivalentsIncludingTerrain(PhysicalGameState pgs);
+         bool equivalentsIncludingTerrain(PhysicalGameState &pgs);
 
         /**
          * Returns an array with true if the given position has
@@ -356,6 +360,9 @@ class PhysicalGameState {
          */
          void resetAllUnitsHP();
 };
+
+
+
 
 
 

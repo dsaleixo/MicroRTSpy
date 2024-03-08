@@ -27,8 +27,8 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/Users/Gilmar Aleixo/AppData/Local/Temp/pip-build-env-gthnh_mp/overlay/Lib/site-packages/cmake/data/bin/cmake.exe" "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14"
-MakeCommand: "C:\Users\Gilmar Aleixo\AppData\Local\Temp\pip-build-env-ee9wkxjh\overlay\Lib\site-packages\cmake\data\bin\cmake.exe" --build . --config "${CTEST_CONFIGURATION_TYPE}"
+ConfigureCommand: "C:/Users/Gilmar Aleixo/AppData/Local/Temp/pip-build-env-zaehragd/overlay/Lib/site-packages/cmake/data/bin/cmake.exe" "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14"
+MakeCommand: "C:\Users\Gilmar Aleixo\AppData\Local\Temp\pip-build-env-nygqr25g\overlay\Lib\site-packages\cmake\data\bin\cmake.exe" --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 
 # version control

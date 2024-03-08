@@ -31,8 +31,8 @@ PYBIND11_MODULE(MicroRTSpy, m) {
         .def("consistentWith", &ResourceUsage::consistentWith);
 
     py::class_<UnitActionAssignment>(m, "UnitActionAssignment")
-        .def("getUnit", &UnitActionAssignment::getUnit, py::return_value_policy::reference)
-        .def("getUnitAction", &UnitActionAssignment::getUnitAction, py::return_value_policy::reference)
+        .def("getIdUnit", &UnitActionAssignment::getIdUnit)
+        .def("getUnitAction", &UnitActionAssignment::getUnitAction)
         .def("getTime", &UnitActionAssignment::getTime)
         .def("toString", &UnitActionAssignment::toString);
 

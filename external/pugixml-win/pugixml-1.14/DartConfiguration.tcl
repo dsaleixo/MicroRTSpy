@@ -4,8 +4,8 @@
 
 
 # Configuration directories and files
-SourceDirectory: C:/projetos/MicroRTS_cpp/external/pugixml-1.14
-BuildDirectory: C:/projetos/MicroRTS_cpp/external/pugixml-1.14
+SourceDirectory: C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14
+BuildDirectory: C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14
 
 # Where to place the cost data store
 CostDataFile: 
@@ -27,7 +27,7 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/projetos/MicroRTS_cpp/external/pugixml-1.14"
+ConfigureCommand: "C:/Program Files/CMake/bin/cmake.exe" "C:/projetos/MicroRTS_cpp/external/pugixml-win/pugixml-1.14"
 MakeCommand: "C:\Program Files\CMake\bin\cmake.exe" --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 

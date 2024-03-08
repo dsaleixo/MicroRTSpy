@@ -2,10 +2,10 @@
 #include "UnitAction.h"
 #include "Unit.h"
 
-Unit* UnitActionAssignment::getUnit() {
-    return this->unit;
+long UnitActionAssignment::getIdUnit() {
+    return this->id_unit;
 }
-UnitAction* UnitActionAssignment::getUnitAction() {
+UnitAction& UnitActionAssignment::getUnitAction() {
     return this->action;
 }
 int UnitActionAssignment::getTime() {
@@ -15,12 +15,11 @@ int UnitActionAssignment::getTime() {
 
 
 UnitActionAssignment::~UnitActionAssignment() {
-	this->unit = nullptr;
-    this->action = nullptr;
+	
     
 }
-UnitActionAssignment::UnitActionAssignment(Unit* a_unit, UnitAction *a_action, int a_time) {
-    this->unit = a_unit;
+UnitActionAssignment::UnitActionAssignment(long a_unit, UnitAction &a_action, int a_time) {
+    this->id_unit = a_unit;
     this->action = a_action;
     //if (action == nullptr) {
     //    cout << "UnitActionAssignment with null action!" < endl;
@@ -29,5 +28,5 @@ UnitActionAssignment::UnitActionAssignment(Unit* a_unit, UnitAction *a_action, i
 }
 
 string UnitActionAssignment::toString() {
-    return "uaa : {"+to_string(this->time)+", " + this->unit->toString() + ", " + this->action->toString() + "}";
+    return "uaa : {"+to_string(this->time)+", " + to_string(this->id_unit) + ", " + this->action.toString() + "}";
 }
